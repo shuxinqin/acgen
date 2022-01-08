@@ -1,7 +1,10 @@
 ﻿
+var projectName = "AceFx";
+var moduleName = "Sys";
+
 foreach(var table in model.Tables)
 {
-    var newModel = new { Table = table, RootModel = model };
+    var newModel = new { RootModel = model, Table = table, ProjectName = projectName, ModuleName = moduleName };
     
     Emit("Entity.t", newModel);
 

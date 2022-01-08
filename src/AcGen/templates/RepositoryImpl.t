@@ -1,6 +1,9 @@
 ﻿
+var projectName = model.ProjectName;
+var moduleName = model.ModuleName;
+
 var entityName = UnderScoreCaseToPascal(model.Table.Name);
-outputFileName = model.RootModel.OutDir + "/Repositories/Impls/" + entityName + "Repository.cs";
+outputFileName = model.RootModel.OutDir + "/" + projectName + "." + "Repositories/Impls/" + entityName + "Repository.cs";
 
 var table = (AcGen.DbTableInfo)model.Table;
 var idColumn = table.Columns.Where(a => a.IsPrimaryKey).FirstOrDefault();
@@ -13,7 +16,7 @@ if(idColumn != null)
 
 <%
 
-namespace AceFx.Repositories
+namespace <$ projectName $>.Repositories
 {
     class <$ entityName $>Repository : RepositoryBase<<$ entityName $>>, I<$ entityName $>Repository
     {

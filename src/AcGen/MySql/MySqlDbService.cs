@@ -11,7 +11,7 @@ namespace AcGen.MySql
         {
             this.ConnString = connString;
         }
-        public List<DbTableInfo> GetTables()
+        public List<DbTableInfo> GetTables(List<string> tablesOnly)
         {
             using IDbConnection conn = new MySqlConnection(this.ConnString);
             string database = conn.Database;
@@ -21,7 +21,13 @@ namespace AcGen.MySql
                 return new MySqlConnection(this.ConnString);
             });
 
-            var tables = dbContext.Query<Table>().Where(a => a.TABLE_SCHEMA == database).ToList();
+            var q = dbContext.Query<Table>().Where(a => a.TABLE_SCHEMA == database);
+            if (tablesOnly.Count > 0)
+            {
+                q = q.Where(a => tablesOnly.Contains(a.TABLE_NAME));
+            }
+
+            var tables = q.ToList();
             var columns = dbContext.Query<Column>().Where(a => a.TABLE_SCHEMA == database);
 
             List<DbTableInfo> dbTables = new List<DbTableInfo>();

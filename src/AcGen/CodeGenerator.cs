@@ -32,7 +32,7 @@ namespace AcGen
             string outDir = Path.GetFullPath(arg.OutDir).AsStdPath();
             string templateFile = Path.GetFullPath(arg.TemplateFile).AsStdPath();
 
-            List<DbTableInfo> tables = dbService.GetTables();
+            List<DbTableInfo> tables = dbService.GetTables(arg.TablesOnly);
 
             Console.WriteLine($"查询到 {tables.Count} 个表...");
 

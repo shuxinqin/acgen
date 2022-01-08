@@ -1,6 +1,9 @@
 ﻿
+var projectName = model.ProjectName;
+var moduleName = model.ModuleName;
+
 var entityName = UnderScoreCaseToPascal(model.Table.Name);
-outputFileName = model.RootModel.OutDir + "/Services/Impls/" + entityName + "Service.cs";
+outputFileName = model.RootModel.OutDir + "/" + projectName + "." + "Services/Impls/" + entityName + "Service.cs";
 
 var table = (AcGen.DbTableInfo)model.Table;
 var idColumn = table.Columns.Where(a => a.IsPrimaryKey).FirstOrDefault();
@@ -15,7 +18,7 @@ var isSoftDelete = table.Columns.Any(a => a.Name =="IsDeleted");
 
 <%
 
-namespace AceFx.Services
+namespace <$ projectName $>.Services
 {
     public class <$ entityName $>Service : BizServiceBase<I<$ entityName $>Repository>, I<$ entityName $>Service
     {

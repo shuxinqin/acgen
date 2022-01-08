@@ -15,15 +15,17 @@ dotnet acgen.dll
 ## 运行 acgen 程序
 **acgen 启动参数说明：**
 ```
--t(template):         表示模版文件
+-t(template):         模版文件
 
--o(out):              表示输出文件保存目录
+-o(out):              指定输出文件保存目录
 
 -clean:               表示生成之前清空 -o(out) 目录
 
--db:                  表示数据库类型。目前支持 mysql
+-db:                  数据库类型。目前支持 mysql
 
--conn:                表示用双引号("")包裹的连接字符串
+-conn:                用双引号("")包裹的数据库连接字符串
+
+-tables               指定要生成代码的表(多个用 {"\",\""} 分隔)。不传或传空则查询所有表
 
 -v:                   查看版本号
 
@@ -47,7 +49,7 @@ acgen 未使用其它第三方模版引擎，是鄙人根据个人喜好自主�
 ### 编写说明
 * 模版文件使用 .t 后缀
 
-* 模版编写说明：
+* 编写规则：
     * 模版内 <% %> 块内表示输出内容，<% 表示开始标记，%> 表示结束标记
     * 模版内 <# #> 块内表示 csharp 代码，<# 表示开始标记，#> 表示结束标记
     * 模版内 <$ $> 块内可填写 csharp 的变量，如 <$ model.Name $>，最终会直接输出 model.Name 值到相应位置，类似 vue 的 {{ model.Name }} 效果
@@ -80,9 +82,12 @@ acgen 未使用其它第三方模版引擎，是鄙人根据个人喜好自主�
 ### 示例
 根模版：[root.t](./src/AcGen/templates/root.t)
 ```
+var projectName = "AceFx";
+var moduleName = "Sys";
+
 foreach(var table in model.Tables)
 {
-    var newModel = new { Table = table, RootModel = model };
+    var newModel = new { RootModel = model, Table = table, ProjectName = projectName, ModuleName = moduleName };
     
     Emit("Entity.t", newModel);    //将 newModel 分发给 Entity.t 模版处理
 
@@ -108,15 +113,18 @@ foreach(var table in model.Tables)
 ```
 //root.t 传过来的 model 是一个匿名类型
 
+var projectName = model.ProjectName;
+var moduleName = model.ModuleName;
+
 //将下划线分隔的名称转成 Pascal 风格名称
 var entityName = UnderScoreCaseToPascal(model.Table.Name);
 
 //设置输出的文件路径
-outputFileName = model.RootModel.OutDir + "/Entities/" + entityName + ".cs";
+outputFileName = model.RootModel.OutDir + "/" + projectName + "." + "Entities/" + entityName + ".cs";
 
 <%
 
-namespace AceFx.Entities
+namespace <$ projectName $>.Entities
 {
     /// <summary>
     /// <$ model.Table.Comment $>

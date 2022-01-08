@@ -2,6 +2,6 @@
 {
     public interface IDbService
     {
-        List<DbTableInfo> GetTables();
+        List<DbTableInfo> GetTables(List<string> tablesOnly);
     }
 }

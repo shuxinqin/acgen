@@ -2,7 +2,7 @@
 {
     internal class MockDbService : IDbService
     {
-        public List<DbTableInfo> GetTables()
+        public List<DbTableInfo> GetTables(List<string> tablesOnly)
         {
             List<DbTableInfo> tables = new List<DbTableInfo>();
 

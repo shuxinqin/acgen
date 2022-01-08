@@ -1,10 +1,13 @@
 ﻿
+var projectName = model.ProjectName;
+var moduleName = model.ModuleName;
+
 var entityName = UnderScoreCaseToPascal(model.Table.Name);
-outputFileName = model.RootModel.OutDir + "/Models/" + entityName + "/" + entityName + "InputBase.cs";
+outputFileName = model.RootModel.OutDir + "/" + projectName + "." + "Models/" + entityName + "/" + entityName + "InputBase.cs";
 
 <%
 
-namespace AceFx.Models
+namespace <$ projectName $>.Models
 {
     public class <$ entityName $>InputBase : ValidationModel
     {

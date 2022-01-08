@@ -1,6 +1,9 @@
 ﻿
+var projectName = model.ProjectName;
+var moduleName = model.ModuleName;
+
 var entityName = UnderScoreCaseToPascal(model.Table.Name);
-outputFileName = model.RootModel.OutDir + "/Services/I" + entityName + "Service.cs";
+outputFileName = model.RootModel.OutDir + "/" + projectName + "." + "Services/I" + entityName + "Service.cs";
 
 var table = (AcGen.DbTableInfo)model.Table;
 var idColumn = table.Columns.Where(a => a.IsPrimaryKey).FirstOrDefault();
@@ -15,7 +18,7 @@ var isSoftDelete = table.Columns.Any(a => a.Name =="IsDeleted");
 
 <%
 
-namespace AceFx.Services
+namespace <$ projectName $>.Services
 {
     public interface I<$ entityName $>Service : IService
     {
@@ -25,20 +28,20 @@ namespace AceFx.Services
         Task<<$ entityName $>Model> GetAsync(<$ keyType $> id);
         Task<<$ entityName $>Model> AddAsync(Add<$ entityName $>Input input);
         Task<<$ entityName $>Model> UpdateAsync(Update<$ entityName $>Input input);
-        <#
-            if(isSoftDelete)
-            {
+    <#
+        if(isSoftDelete)
+        {
         <%
         Task DeleteAsync(<$ keyType $> id, string deleteUserId);
         %>
-            }
-            else
-            {
+        }
+        else
+        {
         <%
         Task DeleteAsync(<$ keyType $> id);
         %>
-            }
-        #>
+        }
+    #>
     }
 }
 

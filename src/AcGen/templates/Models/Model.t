@@ -1,10 +1,13 @@
 ﻿
+var projectName = model.ProjectName;
+var moduleName = model.ModuleName;
+
 var entityName = UnderScoreCaseToPascal(model.Table.Name);
-outputFileName = model.RootModel.OutDir + "/Models/" + entityName + "/" + entityName + "Model.cs";
+outputFileName = model.RootModel.OutDir + "/" + projectName + "." + "Models/" + entityName + "/" + entityName + "Model.cs";
 
 <%
 
-namespace AceFx.Models
+namespace <$ projectName $>.Models
 {
     /// <summary>
     /// <$ model.Table.Comment $>

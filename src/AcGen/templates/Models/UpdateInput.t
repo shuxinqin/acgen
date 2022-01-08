@@ -1,10 +1,13 @@
 ﻿
+var projectName = model.ProjectName;
+var moduleName = model.ModuleName;
+
 var entityName = UnderScoreCaseToPascal(model.Table.Name);
-outputFileName = model.RootModel.OutDir + "/Models/" + entityName + "/Update" + entityName + "Input.cs";
+outputFileName = model.RootModel.OutDir + "/" + projectName + "." + "Models/" + entityName + "/Update" + entityName + "Input.cs";
 
 <%
 
-namespace AceFx.Models
+namespace <$ projectName $>.Models
 {
     [MapToType(typeof(<$ entityName $>))]
     public class Update<$ entityName $>Input : <$ entityName $>InputBase

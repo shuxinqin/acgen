@@ -1,6 +1,11 @@
 ﻿
+var projectName = model.ProjectName;
+var moduleName = model.ModuleName;
+
+string areaName = moduleName;
+
 var entityName = UnderScoreCaseToPascal(model.Table.Name);
-outputFileName = model.RootModel.OutDir + "/Controllers/" + entityName + "Controller.cs";
+outputFileName = model.RootModel.OutDir + "/" + projectName + "." + "Web/Areas/" + areaName + "/Controllers/" + entityName + "Controller.cs";
 
 var table = (AcGen.DbTableInfo)model.Table;
 var idColumn = table.Columns.Where(a => a.IsPrimaryKey).FirstOrDefault();
@@ -11,11 +16,11 @@ if(idColumn != null)
     keyType = idColumn.DataTypeName;
 }
 
-string areaName = "Sys";
+var isSoftDelete = table.Columns.Any(a => a.Name =="IsDeleted");
 
 <%
 
-namespace AceFx.Areas.Sys.Controllers
+namespace <$ projectName $>.Areas.<$ areaName $>.Controllers
 {
     [Area("<$ areaName $>")]
     [Permission("<$ areaName.ToLower() $>.<$ model.Table.Name.ToLower() $>")]
@@ -74,7 +79,20 @@ namespace AceFx.Areas.Sys.Controllers
         [HttpPost]
         public async Task<ActionResult> Delete(<$ keyType $> id)
         {
+        <#
+            if(isSoftDelete)
+            {
+            <%
             await this.Service.DeleteAsync(id, this.CurrentSession.UserId);
+            %>
+            }
+            else
+            {
+            <%
+            await this.Service.DeleteAsync(id);
+            %>
+            }
+        #>
             return this.DeleteSuccessMsg();
         }
     }
