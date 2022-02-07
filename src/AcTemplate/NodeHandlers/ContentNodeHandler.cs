@@ -1,9 +1,9 @@
 ﻿namespace AcTemplate.NodeHandlers
 {
-    public class ContentNodeHander : NodeHander
+    public class ContentNodeHandler : NodeHandler
     {
         StringBuilder _sb = new StringBuilder();
-        public ContentNodeHander(HandleContext handleContext) : base(handleContext)
+        public ContentNodeHandler(HandleContext handleContext) : base(handleContext)
         {
 
         }

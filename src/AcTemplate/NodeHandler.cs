@@ -2,9 +2,9 @@
 
 namespace AcTemplate
 {
-    public class NodeHander
+    public class NodeHandler
     {
-        public NodeHander(HandleContext handleContext)
+        public NodeHandler(HandleContext handleContext)
         {
             this.HandleContext = handleContext;
         }
@@ -64,7 +64,7 @@ namespace AcTemplate
             if (StartsWith(line, position, "<%"))
             {
                 this.HandleContext.SuspendLastHandler();
-                ContentNodeHander contentNodeHandler = new ContentNodeHander(this.HandleContext);
+                ContentNodeHandler contentNodeHandler = new ContentNodeHandler(this.HandleContext);
                 this.HandleContext.AddHandler(contentNodeHandler);
                 contentNodeHandler.Start(fileLine, ref position);
                 return;
@@ -73,7 +73,7 @@ namespace AcTemplate
             if (StartsWith(line, position, "<#"))
             {
                 this.HandleContext.SuspendLastHandler();
-                CsharpCodeNodeHander csharpCodeNodeHandler = new CsharpCodeNodeHander(this.HandleContext);
+                CsharpCodeNodeHandler csharpCodeNodeHandler = new CsharpCodeNodeHandler(this.HandleContext);
                 this.HandleContext.AddHandler(csharpCodeNodeHandler);
                 csharpCodeNodeHandler.Start(fileLine, ref position);
                 return;
@@ -82,7 +82,7 @@ namespace AcTemplate
             if (StartsWith(line, position, "<$"))
             {
                 this.HandleContext.SuspendLastHandler();
-                CsharpPlaceholderNodeHander csharpPlaceholderNodeHandler = new CsharpPlaceholderNodeHander(this.HandleContext);
+                CsharpPlaceholderNodeHandler csharpPlaceholderNodeHandler = new CsharpPlaceholderNodeHandler(this.HandleContext);
                 this.HandleContext.AddHandler(csharpPlaceholderNodeHandler);
                 csharpPlaceholderNodeHandler.Start(fileLine, ref position);
                 return;

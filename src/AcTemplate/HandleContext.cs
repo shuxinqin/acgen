@@ -7,11 +7,11 @@
 
         }
         public CodeWriter Writer { get; set; }
-        public List<NodeHander> Handlers { get; set; } = new List<NodeHander>();
+        public List<NodeHandler> Handlers { get; set; } = new List<NodeHandler>();
 
-        public NodeHander LastHandler { get { return this.Handlers.Last(); } }
+        public NodeHandler LastHandler { get { return this.Handlers.Last(); } }
 
-        public void AddHandler(NodeHander nodeHandler)
+        public void AddHandler(NodeHandler nodeHandler)
         {
             this.Handlers.Add(nodeHandler);
         }

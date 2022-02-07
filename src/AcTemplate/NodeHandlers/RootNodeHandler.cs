@@ -1,8 +1,8 @@
 ﻿namespace AcTemplate.NodeHandlers
 {
-    public class RootNodeHander : CsharpCodeNodeHander
+    public class RootNodeHandler : CsharpCodeNodeHandler
     {
-        public RootNodeHander(HandleContext handleContext) : base(handleContext)
+        public RootNodeHandler(HandleContext handleContext) : base(handleContext)
         {
 
         }

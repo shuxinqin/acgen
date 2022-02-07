@@ -13,7 +13,7 @@ namespace AcTemplate
         public void Parse(CodeWriter writer, string templatePath)
         {
             HandleContext handleContext = new HandleContext() { Writer = writer };
-            handleContext.AddHandler(new RootNodeHander(handleContext));
+            handleContext.AddHandler(new RootNodeHandler(handleContext));
 
             IEnumerable<FileLine> fileLines = FileHelpers.MakeFileLines(templatePath);
 

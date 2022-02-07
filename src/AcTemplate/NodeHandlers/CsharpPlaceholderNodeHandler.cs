@@ -1,10 +1,10 @@
 ﻿namespace AcTemplate.NodeHandlers
 {
-    public class CsharpPlaceholderNodeHander : NodeHander
+    public class CsharpPlaceholderNodeHandler : NodeHandler
     {
         StringBuilder _sb = new StringBuilder();
 
-        public CsharpPlaceholderNodeHander(HandleContext handleContext) : base(handleContext)
+        public CsharpPlaceholderNodeHandler(HandleContext handleContext) : base(handleContext)
         {
 
         }
