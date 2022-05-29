@@ -149,7 +149,7 @@ namespace AcTemplate
         public static string GenTemplateClassBuildMethod(string templatePath, string indent)
         {
             CodeWriter writer = new CodeWriter(indent);
-            writer.WriteIndentLine("protected override BuildResult Build(dynamic model, string indent, CodeWriter writer)");
+            writer.WriteIndentLine("protected override void Build(dynamic model, string indent, CodeWriter writer, ref string outputFileName)");
             writer.WriteIndentLine("{");
 
             string bodyCode = GenTemplateClassBuildMethodBody(templatePath, indent + Indent);
@@ -162,14 +162,8 @@ namespace AcTemplate
         public static string GenTemplateClassBuildMethodBody(string templatePath, string indent)
         {
             CodeWriter writer = new CodeWriter(indent);
-
-            writer.WriteIndentLine("string outputFileName = string.Empty;");
-
             TemplateParser.Instance.Parse(writer, templatePath);
-
             writer.WriteLine();
-            writer.WriteIndent("return new BuildResult() { Content = writer.ToString(), OutputFileName = outputFileName };");
-
             return writer.ToString();
         }
     }

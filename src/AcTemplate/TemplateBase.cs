@@ -19,7 +19,9 @@ namespace AcTemplate
         {
             try
             {
-                BuildResult buildResult = this.Build(model, this.Indent, this.Writer);
+                string outputFileName = string.Empty;
+                this.Build(model, this.Indent, this.Writer, ref outputFileName);
+                BuildResult buildResult = new BuildResult() { Content = this.Writer.ToString(), OutputFileName = outputFileName };
                 if (!string.IsNullOrEmpty(buildResult.OutputFileName))
                 {
                     //保存输出内容
@@ -72,7 +74,7 @@ namespace AcTemplate
 
             return exp;
         }
-        protected abstract BuildResult Build(dynamic model, string indent, CodeWriter writer);
+        protected abstract void Build(dynamic model, string indent, CodeWriter writer, ref string outputFileName);
 
         protected void Include(string templatePath, object model, string indent)
         {
@@ -124,13 +126,9 @@ namespace AcTemplate
         {
         }
 
-        protected override BuildResult Build(dynamic model, string indent, CodeWriter writer)
+        protected override void Build(dynamic model, string indent, CodeWriter writer, ref string outputFileName)
         {
-            string outputFileName = string.Empty;
-
             writer.WriteLine("这是生成的内容");
-
-            return new BuildResult() { Content = writer.ToString(), OutputFileName = outputFileName };
         }
     }
 
