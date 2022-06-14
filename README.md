@@ -6,18 +6,18 @@ acgen 是基于 .net 6 开发的一个根据数据库表结构支持模版的代
 ## 编译
 在 AcGen 目录中打开 cmd 运行命令：
 ```
-dotnet publish -o ../../publish
+dotnet publish -c Release -r win-x64 --self-contained -o bin\Release\win-x64
 ```
-相关程序文件将发布在 publish 目录下，进入 publish 目录通过 dotnet 命令即可启动程序：
+相关程序文件将发布在 bin\Release\win-x64 目录下，进入 bin\Release\win-x64 目录在 cmd 里输入 acgen 命令即可启动程序：
 ```
-dotnet acgen.dll
+acgen -h
 ```
 ## 运行 acgen 程序
 **acgen 启动参数说明：**
 ```
--t(template):         模版文件
+-t(template):         模版文件。不指定则使用内置模板
 
--o(out):              指定输出文件保存目录
+-o(out):              指定输出文件保存目录。不指定则保存在当前目录的 out 文件夹中
 
 -clean:               表示生成之前清空 -o(out) 目录
 
@@ -34,12 +34,12 @@ dotnet acgen.dll
 **例：**
 
 ```
-dotnet acgen.dll -t ./templates/root.t -o ./out -clean -db mysql -conn "Server=localhost;Port=3306;Database=Chloe;Uid=root;Password=sasa;"
+acgen -clean -db mysql -conn "Server=localhost;Port=3306;Database=Chloe;Uid=root;Password=sasa;"
 ```
 
 db 参数传入 test 可直接查看 mock db 生成效果：
 ```
-dotnet acgen.dll -t ./templates/root.t -o ./out -clean -db test -conn ""
+acgen -clean -db test -conn ""
 ```
 
 程序运行结束后，会根据 -t 传入的模版生成相应的文件，生成的文件会保存在 out 目录下。

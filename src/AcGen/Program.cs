@@ -80,8 +80,8 @@
             string connString = "\"Your connection string\"";
             string tablesString = "\"User, City\"";
             string help = $@"启动命令参数:
-    -t(template):      表示模版文件
-    -o(out):           表示输出文件保存目录
+    -t(template):      表示模版文件。不指定则使用内置模板
+    -o(out):           表示输出文件保存目录。不指定则保存在当前目录的 out 文件夹中
     -clean:            表示生成之前清空 -o(out) 目录
     -db:               表示数据库类型。目前支持 mysql
     -conn:             表示用双引号({"\"\""})包裹的连接字符串
