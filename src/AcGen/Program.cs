@@ -8,7 +8,7 @@
         {
             /*
              * usage:
-             * dotnet acgen.dll -t ./templates/root.t -o ./out -clean -db mysql -conn "Server=localhost;Port=3306;Database=Chloe;Uid=root;Password=sasa;"
+             * acgen -t ./templates/root.t -o ./out -clean -db mysql -conn "Server=localhost;Port=3306;Database=Chloe;Uid=root;Password=sasa;"
              */
             Run(args);
         }
@@ -60,7 +60,7 @@
             arg.OutDir = startArgs.GetValue("o");
             arg.CleanOutDir = cleanOutDir;
             arg.DbType = startArgs["db"];
-            arg.ConnectionString = startArgs["conn"];
+            arg.ConnectionString = startArgs.GetValue("conn");
 
             if (startArgs.ContainsKey("tables"))
             {
