@@ -49,15 +49,15 @@
                 return;
             }
 
-            ProgramStartInfo.Args.EnsureHasArgs("o", "t", "db");
+            ProgramStartInfo.Args.EnsureHasArgs("db");
 
             StartArgs startArgs = ProgramStartInfo.Args;
 
             bool cleanOutDir = startArgs.ContainsKey("clean");
 
             GenArg arg = new GenArg();
-            arg.TemplateFile = startArgs["t"];
-            arg.OutDir = startArgs["o"];
+            arg.TemplateFile = startArgs.GetValue("t");
+            arg.OutDir = startArgs.GetValue("o");
             arg.CleanOutDir = cleanOutDir;
             arg.DbType = startArgs["db"];
             arg.ConnectionString = startArgs["conn"];

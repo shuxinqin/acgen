@@ -29,8 +29,8 @@ namespace AcGen
                 Environment.Exit(0);
             }
 
-            string outDir = Path.GetFullPath(arg.OutDir).AsStdPath();
-            string templateFile = Path.GetFullPath(arg.TemplateFile).AsStdPath();
+            string outDir = arg.GetOutDir();
+            string templateFile = arg.GetRootTemplate();
 
             List<DbTableInfo> tables = dbService.GetTables(arg.TablesOnly);
 

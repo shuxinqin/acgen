@@ -24,11 +24,17 @@ namespace <$ projectName $>.Entities
         <#
         foreach(var column in model.Table.Columns)
         {
+            var dataTypeName = column.DataTypeName;
+            if(column.Name == "IsDeleted")
+            {
+                dataTypeName = "bool";
+            }
+
         <%
         /// <summary>
         /// <$ column.Comment $>
         /// </summary>
-        public <$ column.DataTypeName $> <$ column.Name $> { get; set; }
+        public <$ dataTypeName $> <$ column.Name $> { get; set; }
 
         %>
         }
