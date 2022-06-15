@@ -15,6 +15,7 @@ if(idColumn != null)
 }
 
 var isSoftDelete = table.Columns.Any(a => a.Name =="IsDeleted");
+var hasCreateTime = table.Columns.Any(a => a.Name =="CreateTime");
 
 <%
 
@@ -55,7 +56,36 @@ namespace <$ projectName $>.Services
 
         public async Task<<$ entityName $>Model> AddAsync(Add<$ entityName $>Input input)
         {
-            return await this.AddFromInputAsync<Add<$ entityName $>Input, <$ entityName $>, <$ entityName $>Model>(input);
+            <$ entityName $> entity = new <$ entityName $>();
+            input.MapTo(entity);
+
+            <#
+            if(idColumn.DataTypeName == "string")
+            {
+                <%
+            entity.<$ idColumn.Name $> = IdHelper.CreateStringSnowflakeId();
+                %>
+            }
+
+            if(!idColumn.IsAutoIncrement && idColumn.DataTypeName == "long")
+            {
+                <%
+            entity.<$ idColumn.Name $> = IdHelper.CreateSnowflakeId();
+                %>
+            }
+
+            if(hasCreateTime)
+            {
+                <%
+            entity.CreateTime = DateTime.Now;    
+                %>
+            }
+            #>
+
+            await this.Repository.InsertAsync(entity);
+
+            <$ entityName $>Model model = entity.MapTo<<$ entityName $>Model>();
+            return model;
         }
 
         public async Task<<$ entityName $>Model> UpdateAsync(Update<$ entityName $>Input input)
@@ -66,21 +96,21 @@ namespace <$ projectName $>.Services
         <#
             if(isSoftDelete)
             {
-        <%
+            <%
         public async Task DeleteAsync(<$ keyType $> id, string deleteUserId)
         {
             await this.SolfDeleteAsync<<$ entityName $>>(id, deleteUserId);
         }
-        %>
+            %>
             }
             else
             {
-        <%
+            <%
         public async Task DeleteAsync(<$ keyType $> id)
         {
             await this.Repository.DeleteByIdAsync(id);
         }
-        %>
+            %>
             }
         #>
     }
