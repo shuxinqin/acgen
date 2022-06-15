@@ -1,5 +1,5 @@
 ﻿using Chloe.MySql;
-using MySql.Data.MySqlClient;
+using MySqlConnector;
 using System.Data;
 
 namespace AcGen.MySql
