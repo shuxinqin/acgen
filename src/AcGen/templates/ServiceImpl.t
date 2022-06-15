@@ -81,7 +81,6 @@ namespace <$ projectName $>.Services
                 %>
             }
             #>
-
             await this.Repository.InsertAsync(entity);
 
             <$ entityName $>Model model = entity.MapTo<<$ entityName $>Model>();
