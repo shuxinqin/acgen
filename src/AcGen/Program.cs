@@ -53,7 +53,7 @@
 
             StartArgs startArgs = ProgramStartInfo.Args;
 
-            bool cleanOutDir = startArgs.ContainsKey("clean");
+            bool cleanOutDir = startArgs.HasArg("clean");
 
             GenArg arg = new GenArg();
             arg.TemplateFile = startArgs.GetValue("t");
@@ -62,7 +62,7 @@
             arg.DbType = startArgs["db"];
             arg.ConnectionString = startArgs.GetValue("conn");
 
-            if (startArgs.ContainsKey("tables"))
+            if (startArgs.HasArg("tables"))
             {
                 arg.TablesOnly.AddRange(startArgs["tables"].Split(",", StringSplitOptions.RemoveEmptyEntries));
             }

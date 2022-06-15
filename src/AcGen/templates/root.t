@@ -1,6 +1,16 @@
 ﻿
-var projectName = "AceFx";
-var moduleName = "Sys";
+var projectName = model.Args["project"];
+var moduleName = model.Args["module"];
+
+if(string.IsNullOrEmpty(projectName))
+{
+    projectName = "AceFx";
+}
+
+if(string.IsNullOrEmpty(moduleName))
+{
+    moduleName = "Biz";
+}
 
 foreach(var table in model.Tables)
 {

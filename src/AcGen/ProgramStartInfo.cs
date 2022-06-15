@@ -56,24 +56,36 @@
             }
         }
     }
-    public class StartArgs : Dictionary<string, string>
+    public class StartArgs
     {
+        Dictionary<string, string> _args = new Dictionary<string, string>();
+
         public StartArgs()
         {
         }
 
+        public int Count { get { return this._args.Count; } }
+
+        public string this[string key]
+        {
+            get
+            {
+                return this.GetValue(key);
+            }
+        }
+
         public bool HasArg(string name)
         {
-            return this.ContainsKey(name);
+            return this._args.ContainsKey(name);
         }
         public string GetValue(string name, string def = null)
         {
-            this.TryGetValue(name, out string value);
+            this._args.TryGetValue(name, out string value);
             return value ?? def;
         }
         public T GetValue<T>(string name, T def = default)
         {
-            if (this.TryGetValue(name, out string value))
+            if (this._args.TryGetValue(name, out string value))
             {
                 return (T)Convert.ChangeType(value, typeof(T));
             }
@@ -103,27 +115,27 @@
 
         public void Set(Dictionary<string, string> args)
         {
-            this.Clear();
+            this._args.Clear();
             foreach (var arg in args)
             {
-                this.Add(arg.Key, arg.Value);
+                this._args.Add(arg.Key, arg.Value);
             }
         }
         public void MergeFrom(Dictionary<string, string> args)
         {
             foreach (var arg in args)
             {
-                this[arg.Key] = arg.Value;
+                this._args[arg.Key] = arg.Value;
             }
         }
 
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append(string.Format("Input {0} args: ", this.Count));
+            sb.Append(string.Format("Input {0} args: ", this._args.Count));
             sb.Append("{");
             bool first = true;
-            foreach (var kv in this)
+            foreach (var kv in this._args)
             {
                 if (!first)
                     sb.Append(",");
