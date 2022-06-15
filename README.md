@@ -54,8 +54,8 @@ acgen 未使用其它第三方模版引擎，是鄙人根据个人喜好自主�
     * 模版内 <# #> 块内表示 csharp 代码，<# 表示开始标记，#> 表示结束标记
     * 模版内 <$ $> 块内可填写 csharp 的变量，如 <$ model.Name $>，最终会直接输出 model.Name 值到相应位置，类似 vue 的 {{ model.Name }} 效果
 
-* 根模版(root.t)内可使用的变量：
-    * model： 通过 -t 传入的模版，model 为 TemplateModel 类型对象，具体参考 https://github.com/shuxinqin/acgen/blob/main/src/AcGen/TemplateModel.cs
+* 根模版(root.t，即通过 -t 传入的模版)内可使用的变量：
+    * model： model 为 TemplateModel 类型对象，具体参考 https://github.com/shuxinqin/acgen/blob/main/src/AcGen/TemplateModel.cs
     * indent：表示当前模版内缩进字符
     * writer：代码输出对象
     * outputFileName：表示要保存的文件全名。空则表示不生成文件，如需要输出文件，可通过 model 内属性根据自己的需求拼接。默认为空。
