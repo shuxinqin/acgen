@@ -89,7 +89,7 @@
     -v:                查看版本号
     -h:                查看帮助
 
-例: dotnet acgen.dll -t ./templates/root.t -o ./out -clean -db mysql -conn {connString} -tables {tablesString}";
+例: acgen -t ./templates/root.t -o ./out -clean -db mysql -conn {connString} -tables {tablesString}";
             help = help.Trim();
             Console.WriteLine(help);
         }
