@@ -3,7 +3,7 @@ var projectName = model.ProjectName;
 var moduleName = model.ModuleName;
 
 var entityName = UnderScoreCaseToPascal(model.Table.Name);
-outputFileName = model.RootModel.OutDir + "/" + projectName + "." + "Repositories/I" + entityName + "Repository.cs";
+outputFileName = model.RootModel.OutDir + "/csharp/" + projectName + "." + "Repositories/I" + entityName + "Repository.cs";
 
 var table = (AcGen.DbTableInfo)model.Table;
 var idColumn = table.Columns.Where(a => a.IsPrimaryKey).FirstOrDefault();

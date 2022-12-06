@@ -3,7 +3,7 @@ var projectName = model.ProjectName;
 var moduleName = model.ModuleName;
 
 var entityName = UnderScoreCaseToPascal(model.Table.Name);
-outputFileName = model.RootModel.OutDir + "/" + projectName + "." + "Entity.Mapping.MySql/" + entityName + "Map.cs";
+outputFileName = model.RootModel.OutDir + "/csharp/" + projectName + "." + "Entity.Mapping.MySql/" + entityName + "Map.cs";
 
 var table = (AcGen.DbTableInfo)model.Table;
 var primaryKey = table.Columns.Where(a=> a.IsPrimaryKey).FirstOrDefault();

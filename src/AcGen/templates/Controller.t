@@ -5,7 +5,7 @@ var moduleName = model.ModuleName;
 string areaName = moduleName;
 
 var entityName = UnderScoreCaseToPascal(model.Table.Name);
-outputFileName = model.RootModel.OutDir + "/" + projectName + "." + "Web/Areas/" + areaName + "/Controllers/" + entityName + "Controller.cs";
+outputFileName = model.RootModel.OutDir + "/csharp/" + projectName + "." + "Web/Areas/" + areaName + "/Controllers/" + entityName + "Controller.cs";
 
 var table = (AcGen.DbTableInfo)model.Table;
 var idColumn = table.Columns.Where(a => a.IsPrimaryKey).FirstOrDefault();

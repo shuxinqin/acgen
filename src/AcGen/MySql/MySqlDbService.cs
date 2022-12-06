@@ -69,6 +69,7 @@ namespace AcGen.MySql
             bool isNullable = column.IS_NULLABLE == "YES";
             switch (dbType)
             {
+                case "char":
                 case "varchar":
                 case "tinytext":
                 case "text":
@@ -86,6 +87,7 @@ namespace AcGen.MySql
                 case "decimal":
                     return isNullable ? "decimal?" : "decimal";
                 case "datetime":
+                case "timestamp":
                     return isNullable ? "DateTime?" : "DateTime";
                 case "enum":
                     return "string";

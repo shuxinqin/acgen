@@ -3,7 +3,7 @@ var projectName = model.ProjectName;
 var moduleName = model.ModuleName;
 
 var entityName = UnderScoreCaseToPascal(model.Table.Name);
-outputFileName = model.RootModel.OutDir + "/" + projectName + "." + "Services/Impls/" + entityName + "Service.cs";
+outputFileName = model.RootModel.OutDir + "/csharp/" + projectName + "." + "Services/Impls/" + entityName + "Service.cs";
 
 var table = (AcGen.DbTableInfo)model.Table;
 var idColumn = table.Columns.Where(a => a.IsPrimaryKey).FirstOrDefault();
@@ -60,14 +60,14 @@ namespace <$ projectName $>.Services
             input.MapTo(entity);
 
             <#
-            if(idColumn.DataTypeName == "string")
+            if(idColumn !=null && idColumn.DataTypeName == "string")
             {
                 <%
             entity.<$ idColumn.Name $> = IdHelper.CreateStringSnowflakeId();
                 %>
             }
 
-            if(!idColumn.IsAutoIncrement && idColumn.DataTypeName == "long")
+            if(idColumn !=null && !idColumn.IsAutoIncrement && idColumn.DataTypeName == "long")
             {
                 <%
             entity.<$ idColumn.Name $> = IdHelper.CreateSnowflakeId();

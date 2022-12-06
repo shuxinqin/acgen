@@ -2,7 +2,7 @@
 {
     internal class Program
     {
-        public static string VERSION = "1.0.0";
+        public static string VERSION = "1.1.0";
 
         static void Main(string[] args)
         {

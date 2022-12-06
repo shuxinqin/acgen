@@ -3,7 +3,7 @@ var projectName = model.ProjectName;
 var moduleName = model.ModuleName;
 
 var entityName = UnderScoreCaseToPascal(model.Table.Name);
-outputFileName = model.RootModel.OutDir + "/" + projectName + "." + "Entity.Mapping/" + entityName + "MapBase.cs";
+outputFileName = model.RootModel.OutDir + "/csharp/" + projectName + "." + "Entity.Mapping/" + entityName + "MapBase.cs";
 
 var table = (AcGen.DbTableInfo)model.Table;
 var IsDeletedColumn = table.Columns.Where(a => a.Name == "IsDeleted").FirstOrDefault();
