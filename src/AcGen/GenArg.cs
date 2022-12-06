@@ -11,6 +11,7 @@ namespace AcGen
         public string ConnectionString { get; set; }
 
         public List<string> TablesOnly { get; set; } = new List<string>();
+        public List<string> TrimTablePrefixes { get; set; } = new List<string>();
 
         public string GetOutDir()
         {

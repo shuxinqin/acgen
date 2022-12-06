@@ -26,6 +26,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<Content Include="templates\ApiController.t">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
 		<Content Include="templates\Models\Search.t">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>

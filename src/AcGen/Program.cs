@@ -67,6 +67,12 @@
                 arg.TablesOnly.AddRange(startArgs["tables"].Split(",", StringSplitOptions.RemoveEmptyEntries));
             }
 
+            if (startArgs.HasArg("-trim_prefixes"))
+            {
+                var prefixes = startArgs["trim_prefixes"].Split(",", StringSplitOptions.RemoveEmptyEntries);
+                arg.TrimTablePrefixes.AddRange(prefixes.Select(a => a.Trim()).Where(a => !string.IsNullOrEmpty(a)));
+            }
+
             CodeGenerator.Run(arg);
 
             Environment.Exit(0);
@@ -86,6 +92,7 @@
     -db:               表示数据库类型。目前支持 mysql
     -conn:             表示用双引号({"\"\""})包裹的连接字符串
     -tables            指定要生成代码的表(多个用 {"\",\""} 分隔)。不传或传空则查询所有表
+    -trim_prefixes     指定要移除的表前缀(多个用 {"\",\""} 分隔)
     -v:                查看版本号
     -h:                查看帮助
 

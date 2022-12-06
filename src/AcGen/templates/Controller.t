@@ -4,7 +4,7 @@ var moduleName = model.ModuleName;
 
 string areaName = moduleName;
 
-var entityName = UnderScoreCaseToPascal(model.Table.Name);
+var entityName = UnderScoreCaseToPascal(model.Table.TrimedName);
 outputFileName = model.RootModel.OutDir + "/csharp/" + projectName + "." + "Web/Areas/" + areaName + "/Controllers/" + entityName + "Controller.cs";
 
 var table = (AcGen.DbTableInfo)model.Table;
@@ -23,7 +23,7 @@ var isSoftDelete = table.Columns.Any(a => a.Name =="IsDeleted");
 namespace <$ projectName $>.Areas.<$ areaName $>.Controllers
 {
     [Area("<$ areaName $>")]
-    [Permission("<$ areaName.ToLower() $>.<$ model.Table.Name.ToLower() $>")]
+    [Permission("<$ areaName.ToLower() $>.<$ model.Table.TrimedName.ToLower() $>")]
     public class <$ entityName $>Controller : WebController<I<$ entityName $>Service>
     {
         public IActionResult Index()
@@ -59,7 +59,7 @@ namespace <$ projectName $>.Areas.<$ areaName $>.Controllers
             return this.SuccessData(model);
         }
 
-        [Permission("<$ areaName.ToLower() $>.<$ model.Table.Name.ToLower() $>.add")]
+        [Permission("<$ areaName.ToLower() $>.<$ model.Table.TrimedName.ToLower() $>.add")]
         [HttpPost]
         public async Task<ActionResult> Add(Add<$ entityName $>Input input)
         {
@@ -67,7 +67,7 @@ namespace <$ projectName $>.Areas.<$ areaName $>.Controllers
             return this.AddSuccessData(model);
         }
 
-        [Permission("<$ areaName.ToLower() $>.<$ model.Table.Name.ToLower() $>.update")]
+        [Permission("<$ areaName.ToLower() $>.<$ model.Table.TrimedName.ToLower() $>.update")]
         [HttpPost]
         public async Task<ActionResult> Update(Update<$ entityName $>Input input)
         {
@@ -75,7 +75,7 @@ namespace <$ projectName $>.Areas.<$ areaName $>.Controllers
             return this.UpdateSuccessMsg();
         }
 
-        [Permission("<$ areaName.ToLower() $>.<$ model.Table.Name.ToLower() $>.delete")]
+        [Permission("<$ areaName.ToLower() $>.<$ model.Table.TrimedName.ToLower() $>.delete")]
         [HttpPost]
         public async Task<ActionResult> Delete(<$ keyType $> id)
         {

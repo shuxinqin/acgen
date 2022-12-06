@@ -2,7 +2,7 @@
 var projectName = model.ProjectName;
 var moduleName = model.ModuleName;
 
-var entityName = UnderScoreCaseToPascal(model.Table.Name);
+var entityName = UnderScoreCaseToPascal(model.Table.TrimedName);
 outputFileName = model.RootModel.OutDir + "/csharp/" + projectName + "." + "Repositories/Impls/" + entityName + "Repository.cs";
 
 var table = (AcGen.DbTableInfo)model.Table;
@@ -28,26 +28,52 @@ namespace <$ projectName $>.Repositories
         public async Task<<$ entityName $>> GetDetailAsync(<$ keyType $> id)
         {
             var q = this.Query();
-
             q = q.IncludeAll();
+            <#
+            if(idColumn != null)
+            {
+            
+                <%
+            q = q.Where(a => a.<$ idColumn.Name $> == id);
+                %>
 
-            q = q.Where(a => a.Id == id);
+            }
+            #>
+
             return await q.FirstOrDefaultAsync();
         }
 
         public async Task<List<<$ entityName $>>> GetListAsync(<$ entityName $>Search condition)
         {
             var q = this.Query();
+            <#
+            if(idColumn != null)
+            {
+            
+                <%
+            q = q.OrderByDesc(a => a.<$ idColumn.Name $>);
+                %>
 
-            q = q.OrderByDesc(a => a.Id);
+            }
+            #>
+
             return await q.ToListAsync();
         }
 
         public async Task<PageData<<$ entityName $>>> GetPageListAsync(Pagination pagination, <$ entityName $>Search condition)
         {
             var q = this.Query();
+            <#
+            if(idColumn != null)
+            {
+            
+                <%
+            q = q.OrderByDesc(a => a.<$ idColumn.Name $>);
+                %>
 
-            q = q.OrderByDesc(a => a.Id);
+            }
+            #>
+
             return await q.TakePageDataAsync(pagination);
         }
     }

@@ -2,7 +2,7 @@
 var projectName = model.ProjectName;
 var moduleName = model.ModuleName;
 
-var entityName = UnderScoreCaseToPascal(model.Table.Name);
+var entityName = UnderScoreCaseToPascal(model.Table.TrimedName);
 outputFileName = model.RootModel.OutDir + "/csharp/" + projectName + "." + "Models/" + entityName + "/" + entityName + "Model.cs";
 
 <%

@@ -34,6 +34,20 @@ namespace AcGen
 
             List<DbTableInfo> tables = dbService.GetTables(arg.TablesOnly);
 
+            List<string> trimTablePrefixes = arg.TrimTablePrefixes;
+            foreach (DbTableInfo table in tables)
+            {
+                table.TrimedName = table.Name;
+                foreach (string prefix in trimTablePrefixes)
+                {
+                    if (table.Name.ToLower().StartsWith(prefix.ToLower()))
+                    {
+                        table.TrimedName = table.Name.Substring(prefix.Length);
+                        break;
+                    }
+                }
+            }
+
             Console.WriteLine($"查询到 {tables.Count} 个表...");
 
             TemplateModel templateModel = new TemplateModel() { OutDir = outDir, Tables = tables };

@@ -32,7 +32,8 @@ foreach(var table in model.Tables)
     Emit("Service.t", newModel);
     Emit("ServiceImpl.t", newModel);
 
-    Emit("Controller.t", newModel);
+    //Emit("Controller.t", newModel);
+    Emit("ApiController.t", newModel);
 
     //前端代码
     Emit("TypeScript/Models/Model.t", newModel);

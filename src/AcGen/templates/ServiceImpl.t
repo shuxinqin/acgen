@@ -2,7 +2,7 @@
 var projectName = model.ProjectName;
 var moduleName = model.ModuleName;
 
-var entityName = UnderScoreCaseToPascal(model.Table.Name);
+var entityName = UnderScoreCaseToPascal(model.Table.TrimedName);
 outputFileName = model.RootModel.OutDir + "/csharp/" + projectName + "." + "Services/Impls/" + entityName + "Service.cs";
 
 var table = (AcGen.DbTableInfo)model.Table;

@@ -8,6 +8,7 @@
 
             DbTableInfo userTable = new DbTableInfo();
             userTable.Name = "User";
+            userTable.TrimedName = "User";
             userTable.Schema = "test";
             userTable.Comment = "用户信息";
 
@@ -17,6 +18,7 @@
 
             DbTableInfo cityTable = new DbTableInfo();
             cityTable.Name = "City";
+            userTable.TrimedName = "City";
             cityTable.Schema = "test";
             cityTable.Comment = "城市信息";
 
