@@ -67,7 +67,7 @@
                 arg.TablesOnly.AddRange(startArgs["tables"].Split(",", StringSplitOptions.RemoveEmptyEntries));
             }
 
-            if (startArgs.HasArg("-trim_prefixes"))
+            if (startArgs.HasArg("trim_prefixes"))
             {
                 var prefixes = startArgs["trim_prefixes"].Split(",", StringSplitOptions.RemoveEmptyEntries);
                 arg.TrimTablePrefixes.AddRange(prefixes.Select(a => a.Trim()).Where(a => !string.IsNullOrEmpty(a)));
