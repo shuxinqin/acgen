@@ -39,6 +39,8 @@
             map["short?"] = "number | null";
             map["DateTime"] = "string";
             map["DateTime?"] = "string | null";
+            map["bool"] = "boolean";
+            map["bool?"] = "boolean | null";
 
             string typeScriptTypeName;
             if (map.TryGetValue(this.DataTypeName, out typeScriptTypeName))
