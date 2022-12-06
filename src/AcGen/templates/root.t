@@ -36,4 +36,5 @@ foreach(var table in model.Tables)
 
     //前端代码
     Emit("TypeScript/Models/Model.t", newModel);
+    Emit("TypeScript/Api.t", newModel);
 }

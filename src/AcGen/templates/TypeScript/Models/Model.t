@@ -77,3 +77,9 @@ export interface Update<$ entityName $>Input extends <$ entityName $>InputBase {
 }
 
 %>
+
+<%
+export interface ListQueryInput {
+    Keyword: string;
+}
+%>

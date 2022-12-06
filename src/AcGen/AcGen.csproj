@@ -68,6 +68,9 @@
 		<Content Include="templates\ServiceImpl.t">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
+		<Content Include="templates\TypeScript\Api.t">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
 		<Content Include="templates\TypeScript\Models\Model.t">
 		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
