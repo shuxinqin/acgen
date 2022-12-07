@@ -67,6 +67,24 @@ namespace AcGen.MySql
         {
             string dbType = column.DATA_TYPE;
             bool isNullable = column.IS_NULLABLE == "YES";
+
+            if (dbType == "int")
+            {
+                string lowerColumnName = column.COLUMN_NAME.ToLower();
+                if (lowerColumnName.StartsWith("is_"))
+                {
+                    return isNullable ? "bool?" : "bool";
+                }
+
+                if (lowerColumnName.StartsWith("is"))
+                {
+                    if (column.COLUMN_NAME.Length > 2 && char.IsUpper(column.COLUMN_NAME[2]))
+                    {
+                        return isNullable ? "bool?" : "bool";
+                    }
+                }
+            }
+
             switch (dbType)
             {
                 case "char":
