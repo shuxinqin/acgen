@@ -64,7 +64,8 @@
 
             if (startArgs.HasArg("tables"))
             {
-                arg.TablesOnly.AddRange(startArgs["tables"].Split(",", StringSplitOptions.RemoveEmptyEntries));
+                var tables = startArgs["tables"].Split(",", StringSplitOptions.RemoveEmptyEntries);
+                arg.TablesOnly.AddRange(tables.Select(a => a.Trim()).Where(a => !string.IsNullOrEmpty(a)));
             }
 
             if (startArgs.HasArg("trim_prefixes"))

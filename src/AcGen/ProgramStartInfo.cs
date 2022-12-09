@@ -29,7 +29,7 @@
                     {
                         //-xx 后的元素有两种可能，一种是没 "-" 前缀的字符串，则表示 -xx 的值；另一种是带 "-" 的字符串，则表示 -xx 的值为空
                         string nextString = args[pamareterIndex + 1];
-                        if (nextString[0] == '-')//当 -xx 后紧接的是带 "-" 的字符串
+                        if (nextString.Length > 0 && nextString[0] == '-')//当 -xx 后紧接的是带 "-" 的字符串
                         {
                             dic[p.Substring(1)] = string.Empty;
                             pamareterIndex = pamareterIndex + 1;
