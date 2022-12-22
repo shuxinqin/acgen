@@ -3,7 +3,7 @@ var projectName = model.ProjectName;
 var moduleName = model.ModuleName;
 
 var entityName = UnderScoreCaseToPascal(model.Table.TrimedName);
-outputFileName = model.RootModel.OutDir + "/TypeScript" + "/Models/" + entityName + "Model.ts";
+outputFileName = model.RootModel.OutDir + "/TypeScript" + "/model/" + entityName + "Model.ts";
 
 <%
 
