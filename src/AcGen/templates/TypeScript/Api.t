@@ -5,6 +5,15 @@ var moduleName = model.ModuleName;
 var entityName = UnderScoreCaseToPascal(model.Table.TrimedName);
 outputFileName = model.RootModel.OutDir + "/TypeScript" + "/" + entityName + "Api.ts";
 
+var table = (AcGen.DbTableInfo)model.Table;
+var idColumn = table.Columns.Where(a => a.IsPrimaryKey).FirstOrDefault();
+
+string keyType = "any";
+if(idColumn != null)
+{
+    keyType = idColumn.TypeScriptDataTypeName;
+}
+
 <%
 import { defHttp } from "/@/utils/http/axios";
 import { ErrorMessageMode } from "/#/axios";
@@ -27,7 +36,7 @@ let Api = {
 };
 
 
-export function getList(params: ListQueryInput, mode: ErrorMessageMode = "modal"): Promise<Model[]> {
+export async function getList(params: ListQueryInput, mode: ErrorMessageMode = "modal"): Promise<Model[]> {
 
   return defHttp.get<Model[]>(
     {
@@ -40,7 +49,7 @@ export function getList(params: ListQueryInput, mode: ErrorMessageMode = "modal"
   );
 }
 
-export function add(params: AddInput, mode: ErrorMessageMode = "modal"): Promise<void> {
+export async function add(params: AddInput, mode: ErrorMessageMode = "modal"): Promise<void> {
   return defHttp.post<void>(
     {
       url: Api.Add,
@@ -52,7 +61,7 @@ export function add(params: AddInput, mode: ErrorMessageMode = "modal"): Promise
   );
 }
 
-export function update(params: UpdateInput, mode: ErrorMessageMode = "modal") {
+export async function update(params: UpdateInput, mode: ErrorMessageMode = "modal") {
   return defHttp.post(
     {
       url: Api.Update,
@@ -64,7 +73,7 @@ export function update(params: UpdateInput, mode: ErrorMessageMode = "modal") {
   );
 }
 
-export function del(id: string, mode: ErrorMessageMode = "modal") {
+export async function del(id: <$ keyType $>, mode: ErrorMessageMode = "modal") {
   let params = { id: id };
   return defHttp.post(
     {
