@@ -56,6 +56,8 @@ namespace <$ projectName $>.Services
 
         public async Task<<$ entityName $>Model> AddAsync(Add<$ entityName $>Input input)
         {
+            input.Validate();
+
             <$ entityName $> entity = new <$ entityName $>();
             input.MapTo(entity);
 
@@ -89,6 +91,8 @@ namespace <$ projectName $>.Services
 
         public async Task<<$ entityName $>Model> UpdateAsync(Update<$ entityName $>Input input)
         {
+            input.Validate();
+
             return await this.UpdateFromInputAsync<Update<$ entityName $>Input, <$ entityName $>, <$ entityName $>Model>(input);
         }
 
