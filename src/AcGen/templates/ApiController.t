@@ -32,7 +32,7 @@ namespace <$ projectName $>.<$ moduleName $>.Controllers
         /// <returns></returns>
         [HttpGet]
         [ProducesResponseType(typeof(ApiResult<List<<$ entityName $>Model>>), 200)]
-        public async Task<ApiResult> GetList([FromQuery] <$ entityName $>Search condition)
+        public async Task<ApiResult> List([FromQuery] <$ entityName $>Search condition)
         {
             List<<$ entityName $>Model> models = await this.Service.GetListAsync(condition);
             return this.SuccessData(models);
@@ -44,7 +44,7 @@ namespace <$ projectName $>.<$ moduleName $>.Controllers
         /// <returns></returns>
         [HttpGet]
         [ProducesResponseType(typeof(ApiResult<PageData<<$ entityName $>Model>>), 200)]
-        public async Task<ApiResult> GetPageList([FromQuery] Pagination pagination, [FromQuery] <$ entityName $>Search condition)
+        public async Task<ApiResult> PageList([FromQuery] Pagination pagination, [FromQuery] <$ entityName $>Search condition)
         {
             PageData<<$ entityName $>Model> pageData = await this.Service.GetPageListAsync(pagination, condition);
             return this.SuccessData(pageData);
@@ -56,7 +56,7 @@ namespace <$ projectName $>.<$ moduleName $>.Controllers
         /// <returns></returns>
         [HttpGet]
         [ProducesResponseType(typeof(ApiResult<<$ entityName $>Model>), 200)]
-        public async Task<ApiResult> GetDetail(<$ keyType $> id)
+        public async Task<ApiResult> Detail(<$ keyType $> id)
         {
             <$ entityName $>Model model = await this.Service.GetDetailAsync(id);
             return this.SuccessData(model);

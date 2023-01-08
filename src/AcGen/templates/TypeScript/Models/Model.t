@@ -31,7 +31,7 @@ export interface <$ entityName $>InputBase {
     <#
     foreach(var column in model.Table.Columns)
     {
-        if(column.Name == "IsDeleted" || column.Name == "DeleteUserId" || column.Name == "DeleteTime")
+        if(column.Name == "CreateTime" || column.Name == "CreateUserId" || column.Name == "CreateUserName" || column.Name == "IsDeleted" || column.Name == "DeleteUserId" || column.Name == "DeleteTime")
         {
             continue;
         }

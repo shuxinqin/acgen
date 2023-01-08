@@ -11,7 +11,7 @@ namespace <$ projectName $>.Models
 {
     public class <$ entityName $>Search
     {
-        public string Name { get; set; }
+        public string Keyword { get; set; }
     }
 }
 
