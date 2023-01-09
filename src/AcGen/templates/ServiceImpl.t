@@ -16,6 +16,7 @@ if(idColumn != null)
 
 var isSoftDelete = table.Columns.Any(a => a.Name =="IsDeleted");
 var hasCreateTime = table.Columns.Any(a => a.Name =="CreateTime");
+var hasDeleteUserId = table.Columns.Any(a => a.Name =="DeleteUserId");
 
 <%
 
@@ -99,12 +100,24 @@ namespace <$ projectName $>.Services
         <#
             if(isSoftDelete)
             {
+                if(hasDeleteUserId)
+                {
             <%
         public async Task DeleteAsync(<$ keyType $> id, string deleteUserId)
         {
             await this.SolfDeleteAsync<<$ entityName $>>(id, deleteUserId);
         }
             %>
+                }
+                else
+                {
+            <%
+        public async Task DeleteAsync(<$ keyType $> id)
+        {
+            await this.SolfDeleteAsync<<$ entityName $>>(id);
+        }
+            %>
+                }
             }
             else
             {

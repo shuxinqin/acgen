@@ -15,6 +15,7 @@ if(idColumn != null)
 }
 
 var isSoftDelete = table.Columns.Any(a => a.Name =="IsDeleted");
+var hasDeleteUserId = table.Columns.Any(a => a.Name =="DeleteUserId");
 
 <%
 
@@ -29,7 +30,7 @@ namespace <$ projectName $>.Services
         Task<<$ entityName $>Model> AddAsync(Add<$ entityName $>Input input);
         Task<<$ entityName $>Model> UpdateAsync(Update<$ entityName $>Input input);
     <#
-        if(isSoftDelete)
+        if(isSoftDelete && hasDeleteUserId)
         {
         <%
         Task DeleteAsync(<$ keyType $> id, string deleteUserId);

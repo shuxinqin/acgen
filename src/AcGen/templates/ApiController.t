@@ -15,6 +15,7 @@ if(idColumn != null)
 }
 
 var isSoftDelete = table.Columns.Any(a => a.Name =="IsDeleted");
+var hasDeleteUserId = table.Columns.Any(a => a.Name =="DeleteUserId");
 
 <%
 
@@ -110,7 +111,7 @@ namespace <$ projectName $>.<$ moduleName $>.Controllers
         public async Task<ApiResult> Delete([FromBody] IdInput<<$ keyType $>> input)
         {
         <#
-            if(isSoftDelete)
+            if(isSoftDelete && hasDeleteUserId)
             {
             <%
             await this.Service.DeleteAsync(input.Id, this.CurrentSession.UserId);

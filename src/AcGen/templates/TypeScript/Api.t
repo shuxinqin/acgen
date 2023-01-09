@@ -49,8 +49,8 @@ export async function getList(params: ListQueryInput, mode: ErrorMessageMode = "
   );
 }
 
-export async function add(params: AddInput, mode: ErrorMessageMode = "modal"): Promise<void> {
-  return defHttp.post<void>(
+export async function add(params: AddInput, mode: ErrorMessageMode = "modal"): Promise<Model> {
+  return defHttp.post<Model>(
     {
       url: Api.Add,
       params
