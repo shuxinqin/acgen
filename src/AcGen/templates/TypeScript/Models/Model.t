@@ -82,4 +82,9 @@ export interface Update<$ entityName $>Input extends <$ entityName $>InputBase {
 export interface ListQueryInput {
     Keyword: string;
 }
+
+export interface PageListQueryInput extends ListQueryInput {
+  Page: number;
+  PageSize: number;
+}
 %>

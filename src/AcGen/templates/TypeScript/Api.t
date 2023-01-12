@@ -21,7 +21,8 @@ import {
   <$ entityName $>Model as Model,
   Add<$ entityName $>Input as AddInput,
   Update<$ entityName $>Input as UpdateInput,
-  ListQueryInput
+  ListQueryInput,
+  PageListQueryInput
 } from "./model/<$ entityName $>Model";
 
 function appendApiPath(action: string) {
@@ -30,6 +31,7 @@ function appendApiPath(action: string) {
 
 let Api = {
   List: appendApiPath("List"),
+  PageList: appendApiPath("PageList"),
   Add: appendApiPath("Add"),
   Update: appendApiPath("Update"),
   Delete: appendApiPath("Delete")
@@ -41,6 +43,19 @@ export async function getList(params: ListQueryInput, mode: ErrorMessageMode = "
   return defHttp.get<Model[]>(
     {
       url: Api.List,
+      params
+    },
+    {
+      errorMessageMode: mode
+    }
+  );
+}
+
+export async function getPageList(params: PageListQueryInput, mode: ErrorMessageMode = "modal"): Promise<Model[]> {
+
+  return defHttp.get<Model[]>(
+    {
+      url: Api.PageList,
       params
     },
     {
