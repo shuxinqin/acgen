@@ -38,7 +38,7 @@ let Api = {
 };
 
 
-export async function getList(params: ListQueryInput | any, mode: ErrorMessageMode = "modal"): Promise<Model[]> {
+export async function getList(params: ListQueryInput, mode: ErrorMessageMode = "modal"): Promise<Model[]> {
 
   return defHttp.get<Model[]>(
     {
@@ -51,7 +51,7 @@ export async function getList(params: ListQueryInput | any, mode: ErrorMessageMo
   );
 }
 
-export async function getPageList(params: PageListQueryInput | any, mode: ErrorMessageMode = "modal"): Promise<Model[]> {
+export async function getPageList(params: PageListQueryInput, mode: ErrorMessageMode = "modal"): Promise<Model[]> {
 
   return defHttp.get<Model[]>(
     {
