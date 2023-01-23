@@ -51,9 +51,9 @@ export async function getList(params: ListQueryInput, mode: ErrorMessageMode = "
   );
 }
 
-export async function getPageList(params: PageListQueryInput, mode: ErrorMessageMode = "modal"): Promise<Model[]> {
+export async function getPageList(params: PageListQueryInput, mode: ErrorMessageMode = "modal"): Promise<PageData<Model>> {
 
-  return defHttp.get<Model[]>(
+  return defHttp.get<PageData<Model>>(
     {
       url: Api.PageList,
       params
