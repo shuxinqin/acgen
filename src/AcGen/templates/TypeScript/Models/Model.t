@@ -80,14 +80,14 @@ export interface Update<$ entityName $>Input extends <$ entityName $>InputBase {
 
 <%
 export interface ListQueryInput {
-    Order: string;
-    Keyword: string;
+    Order?: string;
+    Keyword?: string;
 }
 
 export interface PageListQueryInput extends ListQueryInput {
     Page: number;
     PageSize: number;
-    Order: string;
-    Keyword: string;
+    Order?: string;
+    Keyword?: string;
 }
 %>
