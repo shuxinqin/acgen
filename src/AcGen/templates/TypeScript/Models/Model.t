@@ -84,7 +84,7 @@ export interface ListQueryInput {
     Keyword?: string;
 }
 
-export interface PageListQueryInput extends ListQueryInput {
+export interface PageListQueryInput {
     Page: number;
     PageSize: number;
     Order?: string;
