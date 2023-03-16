@@ -17,6 +17,7 @@ if(idColumn != null)
 <%
 import { defHttp } from "/@/utils/http/axios";
 import { ErrorMessageMode } from "/#/axios";
+import { PageData } from "/@/api/types/PageData";
 import {
   <$ entityName $>Model as Model,
   Add<$ entityName $>Input as AddInput,
