@@ -9,6 +9,7 @@ outputFileName = model.RootModel.OutDir + "/csharp/" + projectName + "." + "Mode
 
 namespace <$ projectName $>.Models
 {
+    [MapToType(typeof(<$ entityName $>))]
     public class <$ entityName $>InputBase : ValidationModel
     {
         <%
