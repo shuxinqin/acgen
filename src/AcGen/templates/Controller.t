@@ -17,6 +17,8 @@ if(idColumn != null)
 }
 
 var isSoftDelete = table.Columns.Any(a => a.Name =="IsDeleted");
+var hasCreateUserIdField = table.Columns.Any(a => a.Name =="CreateUserId");
+var hasCreateUserNameField = table.Columns.Any(a => a.Name =="CreateUserName");
 
 <%
 
@@ -63,6 +65,22 @@ namespace <$ projectName $>.Areas.<$ areaName $>.Controllers
         [HttpPost]
         public async Task<ActionResult> Add(Add<$ entityName $>Input input)
         {
+        <#
+            if(hasCreateUserIdField)
+            {
+            <%
+            input.CreateUserId = this.CurrentSession.UserId;
+            %>
+            }
+        #>
+        <#
+            if(hasCreateUserNameField)
+            {
+            <%
+            input.CreateUserName = this.CurrentSession.UserName;
+            %>
+            }
+        #>
             <$ entityName $>Model model = await this.Service.AddAsync(input);
             return this.AddSuccessData(model);
         }

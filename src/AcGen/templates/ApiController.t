@@ -15,7 +15,9 @@ if(idColumn != null)
 }
 
 var isSoftDelete = table.Columns.Any(a => a.Name =="IsDeleted");
-var hasDeleteUserId = table.Columns.Any(a => a.Name =="DeleteUserId");
+var hasDeleteUserIdField = table.Columns.Any(a => a.Name =="DeleteUserId");
+var hasCreateUserIdField = table.Columns.Any(a => a.Name =="CreateUserId");
+var hasCreateUserNameField = table.Columns.Any(a => a.Name =="CreateUserName");
 
 <%
 
@@ -84,6 +86,22 @@ namespace <$ projectName $>.<$ moduleName $>.Controllers
         [ProducesResponseType(typeof(ApiResult<<$ entityName $>Model>), 200)]
         public async Task<ApiResult> Add([FromBody] Add<$ entityName $>Input input)
         {
+        <#
+            if(hasCreateUserIdField)
+            {
+            <%
+            input.CreateUserId = this.CurrentSession.UserId;
+            %>
+            }
+        #>
+        <#
+            if(hasCreateUserNameField)
+            {
+            <%
+            input.CreateUserName = this.CurrentSession.UserName;
+            %>
+            }
+        #>
             <$ entityName $>Model model = await this.Service.AddAsync(input);
             return this.AddSuccessData(model);
         }
@@ -111,7 +129,7 @@ namespace <$ projectName $>.<$ moduleName $>.Controllers
         public async Task<ApiResult> Delete([FromBody] IdInput<<$ keyType $>> input)
         {
         <#
-            if(isSoftDelete && hasDeleteUserId)
+            if(isSoftDelete && hasDeleteUserIdField)
             {
             <%
             await this.Service.DeleteAsync(input.Id, this.CurrentSession.UserId);

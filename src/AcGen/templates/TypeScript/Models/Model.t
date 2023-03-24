@@ -18,7 +18,7 @@ export interface <$ entityName $>Model {
 
         <%
     //<$ column.Comment $>
-    <$ column.Name $>: <$ column.TypeScriptDataTypeName $>;
+  <$ column.Name $>: <$ column.TypeScriptDataTypeName $>;
         %>
     }
     #>
@@ -42,8 +42,8 @@ export interface <$ entityName $>InputBase {
         }
 
         <%
-    //<$ column.Comment $>
-    <$ column.Name $>: <$ column.TypeScriptDataTypeName $>;
+  //<$ column.Comment $>
+  <$ column.Name $>: <$ column.TypeScriptDataTypeName $>;
         %>
     }
     #>
@@ -69,8 +69,8 @@ export interface Update<$ entityName $>Input extends <$ entityName $>InputBase {
         }
 
         <%
-    //<$ column.Comment $>
-    <$ column.Name $>: <$ column.TypeScriptDataTypeName $>;
+  //<$ column.Comment $>
+  <$ column.Name $>: <$ column.TypeScriptDataTypeName $>;
         %>
     }
     #>
@@ -80,14 +80,14 @@ export interface Update<$ entityName $>Input extends <$ entityName $>InputBase {
 
 <%
 export interface ListQueryInput {
-    Order?: string;
-    Keyword?: string;
+  Order?: string;
+  Keyword?: string;
 }
 
 export interface PageListQueryInput {
-    Page: number;
-    PageSize: number;
-    Order?: string;
-    Keyword?: string;
+  Page: number;
+  PageSize: number;
+  Order?: string;
+  Keyword?: string;
 }
 %>
