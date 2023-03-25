@@ -6,7 +6,6 @@ var entityName = UnderScoreCaseToPascal(model.Table.TrimedName);
 outputFileName = model.RootModel.OutDir + "/TypeScript" + "/model/" + entityName + "Model.ts";
 
 <%
-
 export interface <$ entityName $>Model {
     <#
     foreach(var column in model.Table.Columns)
@@ -17,7 +16,7 @@ export interface <$ entityName $>Model {
         }
 
         <%
-    //<$ column.Comment $>
+  //<$ column.Comment $>
   <$ column.Name $>: <$ column.TypeScriptDataTypeName $>;
         %>
     }
