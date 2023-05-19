@@ -51,8 +51,9 @@ namespace AcGen.MySql
                     dbColumn.Precision = tableColumn.NUMERIC_PRECISION == null ? null : (byte)tableColumn.NUMERIC_PRECISION;
                     dbColumn.Scale = tableColumn.NUMERIC_SCALE == null ? null : (byte)tableColumn.NUMERIC_SCALE;
                     dbColumn.Comment = tableColumn.COLUMN_COMMENT;
-                    dbColumn.IsPrimaryKey = tableColumn.COLUMN_KEY.Split(',').Contains("PRI");
-                    dbColumn.IsAutoIncrement = tableColumn.EXTRA.Split(',').Contains("auto_increment");
+                    dbColumn.IsPrimaryKey = tableColumn.IsPrimaryKey();
+                    dbColumn.IsAutoIncrement = tableColumn.IsAutoIncrement();
+                    dbColumn.IsNullable = tableColumn.IsNullable();
 
                     dbTable.Columns.Add(dbColumn);
                 }
@@ -66,7 +67,7 @@ namespace AcGen.MySql
         static string GetMapCsharpTypeName(Column column)
         {
             string dbType = column.DATA_TYPE;
-            bool isNullable = column.IS_NULLABLE == "YES";
+            bool isNullable = column.IsNullable();
 
             if (dbType == "int")
             {

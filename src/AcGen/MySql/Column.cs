@@ -27,5 +27,20 @@ namespace AcGen.MySql
         public string COLUMN_COMMENT { get; set; }
         public string GENERATION_EXPRESSION { get; set; }
         public int? SRS_ID { get; set; }
+
+        public bool IsPrimaryKey()
+        {
+            return this.COLUMN_KEY != null && this.COLUMN_KEY.Split(',').Contains("PRI");
+        }
+
+        public bool IsAutoIncrement()
+        {
+            return this.EXTRA != null && this.EXTRA.Split(',').Contains("auto_increment");
+        }
+
+        public bool IsNullable()
+        {
+            return this.IS_NULLABLE == "YES";
+        }
     }
 }

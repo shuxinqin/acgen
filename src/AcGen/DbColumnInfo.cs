@@ -7,6 +7,7 @@
         public string DataTypeName { get; set; }
         public bool IsPrimaryKey { get; set; }
         public bool IsAutoIncrement { get; set; }
+        public bool IsNullable { get; set; }
         /// <summary>
         /// 长度
         /// </summary>
