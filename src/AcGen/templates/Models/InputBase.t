@@ -3,11 +3,21 @@ var projectName = model.ProjectName;
 var moduleName = model.ModuleName;
 
 var entityName = UnderScoreCaseToPascal(model.Table.TrimedName);
-outputFileName = model.RootModel.OutDir + "/csharp/" + projectName + "." + "Models/" + entityName + "/" + entityName + "InputBase.cs";
+
+string moduleDir = $"{projectName}";
+string nc = $"{projectName}";
+
+if(!string.IsNullOrEmpty(moduleName))
+{
+    moduleDir = $"{projectName}.{moduleName}/{projectName}.{moduleName}";
+    nc = $"{projectName}.{moduleName}";
+}
+
+outputFileName = model.RootModel.OutDir + "/csharp/" + moduleDir + ".Models/" + entityName + "/" + entityName + "InputBase.cs";
 
 <%
 
-namespace <$ projectName $>.Models
+namespace <$ nc $>.Models
 {
     [MapToType(typeof(<$ entityName $>))]
     public class <$ entityName $>InputBase : ValidationModel

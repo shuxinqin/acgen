@@ -3,7 +3,17 @@ var projectName = model.ProjectName;
 var moduleName = model.ModuleName;
 
 var entityName = UnderScoreCaseToPascal(model.Table.TrimedName);
-outputFileName = model.RootModel.OutDir + "/csharp/" + projectName + "." + "Services/I" + entityName + "Service.cs";
+
+string moduleDir = $"{projectName}";
+string nc = $"{projectName}";
+
+if(!string.IsNullOrEmpty(moduleName))
+{
+    moduleDir = $"{projectName}.{moduleName}/{projectName}.{moduleName}";
+    nc = $"{projectName}.{moduleName}";
+}
+
+outputFileName = model.RootModel.OutDir + "/csharp/" + moduleDir + ".Services/I" + entityName + "Service.cs";
 
 var table = (AcGen.DbTableInfo)model.Table;
 var idColumn = table.Columns.Where(a => a.IsPrimaryKey).FirstOrDefault();
@@ -19,7 +29,7 @@ var hasDeleteUserId = table.Columns.Any(a => a.Name =="DeleteUserId");
 
 <%
 
-namespace <$ projectName $>.Services
+namespace <$ nc $>.Services
 {
     public interface I<$ entityName $>Service : IService
     {

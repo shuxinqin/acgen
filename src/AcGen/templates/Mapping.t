@@ -3,14 +3,24 @@ var projectName = model.ProjectName;
 var moduleName = model.ModuleName;
 
 var entityName = UnderScoreCaseToPascal(model.Table.TrimedName);
-outputFileName = model.RootModel.OutDir + "/csharp/" + projectName + "." + "Entity.Mapping/" + entityName + "MapBase.cs";
+
+string moduleDir = $"{projectName}";
+string nc = $"{projectName}";
+
+if(!string.IsNullOrEmpty(moduleName))
+{
+    moduleDir = $"{projectName}.{moduleName}/{projectName}.{moduleName}";
+    nc = $"{projectName}.{moduleName}";
+}
+
+outputFileName = model.RootModel.OutDir + "/csharp/" + moduleDir + ".Entity.Mapping/" + entityName + "MapBase.cs";
 
 var table = (AcGen.DbTableInfo)model.Table;
 var IsDeletedColumn = table.Columns.Where(a => a.Name == "IsDeleted").FirstOrDefault();
 
 <%
 
-namespace <$ projectName $>.Entity.Mapping
+namespace <$ nc $>.Entity.Mapping
 {
     public abstract class <$ entityName $>MapBase : EntityTypeBuilder<<$ entityName $>>
     {

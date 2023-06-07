@@ -3,7 +3,21 @@ var projectName = model.ProjectName;
 var moduleName = model.ModuleName;
 
 var entityName = UnderScoreCaseToPascal(model.Table.TrimedName);
-outputFileName = model.RootModel.OutDir + "/csharp/" + projectName + "." + "WebApi/" + moduleName + "/Controllers/" + entityName + "Controller.cs";
+
+string moduleDir = $"";
+string nc = $"{projectName}";
+string moduleRoute = $"";
+string modulePermission = $"";
+
+if(!string.IsNullOrEmpty(moduleName))
+{
+    moduleDir = $"{moduleName}/";
+    nc = $"{projectName}.{moduleName}";
+    moduleRoute = $"{moduleName}/";
+    modulePermission = $"{moduleName.ToLower()}.";
+}
+
+outputFileName = model.RootModel.OutDir + "/csharp/" + projectName + "." + "WebApi/" + moduleDir + "Controllers/" + entityName + "Controller.cs";
 
 var table = (AcGen.DbTableInfo)model.Table;
 var idColumn = table.Columns.Where(a => a.IsPrimaryKey).FirstOrDefault();
@@ -21,10 +35,10 @@ var hasCreateUserNameField = table.Columns.Any(a => a.Name =="CreateUserName");
 
 <%
 
-namespace <$ projectName $>.<$ moduleName $>.Controllers
+namespace <$ nc $>.Controllers
 {
     [ApiController]
-    [Route("api/[controller]/[action]")]
+    [Route("api/<$ moduleRoute $>[controller]/[action]")]
     [Login]
     public class <$ entityName $>Controller : WebApiController<I<$ entityName $>Service>
     {
@@ -81,7 +95,7 @@ namespace <$ projectName $>.<$ moduleName $>.Controllers
         /// 添加
         /// </summary>
         /// <returns></returns>
-        [Permission("<$ moduleName.ToLower() $>.<$ model.Table.TrimedName.ToLower() $>.add")]
+        [Permission("<$ modulePermission $><$ model.Table.TrimedName.ToLower() $>.add")]
         [HttpPost]
         [ProducesResponseType(typeof(ApiResult<<$ entityName $>Model>), 200)]
         public async Task<ApiResult> Add([FromBody] Add<$ entityName $>Input input)
@@ -110,7 +124,7 @@ namespace <$ projectName $>.<$ moduleName $>.Controllers
         /// 更新
         /// </summary>
         /// <returns></returns>
-        [Permission("<$ moduleName.ToLower() $>.<$ model.Table.TrimedName.ToLower() $>.update")]
+        [Permission("<$ modulePermission $><$ model.Table.TrimedName.ToLower() $>.update")]
         [HttpPost]
         [ProducesResponseType(typeof(ApiResult), 200)]
         public async Task<ApiResult> Update([FromBody] Update<$ entityName $>Input input)
@@ -123,7 +137,7 @@ namespace <$ projectName $>.<$ moduleName $>.Controllers
         /// 删除
         /// </summary>
         /// <returns></returns>
-        [Permission("<$ moduleName.ToLower() $>.<$ model.Table.TrimedName.ToLower() $>.delete")]
+        [Permission("<$ modulePermission $><$ model.Table.TrimedName.ToLower() $>.delete")]
         [HttpPost]
         [ProducesResponseType(typeof(ApiResult), 200)]
         public async Task<ApiResult> Delete([FromBody] IdInput<<$ keyType $>> input)

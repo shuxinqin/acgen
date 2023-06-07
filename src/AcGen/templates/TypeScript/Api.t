@@ -3,7 +3,17 @@ var projectName = model.ProjectName;
 var moduleName = model.ModuleName;
 
 var entityName = UnderScoreCaseToPascal(model.Table.TrimedName);
-outputFileName = model.RootModel.OutDir + "/TypeScript" + "/" + entityName + "Api.ts";
+
+string moduleDir = $"";
+string moduleApiPath = $"";
+
+if(!string.IsNullOrEmpty(moduleName))
+{
+    moduleDir = $"{moduleName}/";
+    moduleApiPath = $"{moduleName}/";
+}
+
+outputFileName = model.RootModel.OutDir + "/TypeScript/" + moduleDir + entityName + "Api.ts";
 
 var table = (AcGen.DbTableInfo)model.Table;
 var idColumn = table.Columns.Where(a => a.IsPrimaryKey).FirstOrDefault();
@@ -27,7 +37,7 @@ import {
 } from "./model/<$ entityName $>Model";
 
 function appendApiPath(action: string) {
-  return "/<$ entityName $>/" + action;
+  return "/<$ moduleApiPath $><$ entityName $>/" + action;
 }
 
 let Api = {

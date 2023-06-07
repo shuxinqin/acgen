@@ -3,7 +3,15 @@ var projectName = model.ProjectName;
 var moduleName = model.ModuleName;
 
 var entityName = UnderScoreCaseToPascal(model.Table.TrimedName);
-outputFileName = model.RootModel.OutDir + "/TypeScript" + "/model/" + entityName + "Model.ts";
+
+string moduleDir = $"";
+
+if(!string.IsNullOrEmpty(moduleName))
+{
+    moduleDir = $"{moduleName}/";
+}
+
+outputFileName = model.RootModel.OutDir + "/TypeScript/" + moduleDir + "model/" + entityName + "Model.ts";
 
 <%
 export interface <$ entityName $>Model {

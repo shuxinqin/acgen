@@ -9,7 +9,7 @@ if(string.IsNullOrEmpty(projectName))
 
 if(string.IsNullOrEmpty(moduleName))
 {
-    moduleName = "Biz";
+    moduleName = "";
 }
 
 foreach(var table in model.Tables)

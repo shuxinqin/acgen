@@ -3,11 +3,21 @@ var projectName = model.ProjectName;
 var moduleName = model.ModuleName;
 
 var entityName = UnderScoreCaseToPascal(model.Table.TrimedName);
-outputFileName = model.RootModel.OutDir + "/csharp/" + projectName + "." + "Entities/" + entityName + ".cs";
+
+string moduleDir = $"{projectName}";
+string nc = $"{projectName}";
+
+if(!string.IsNullOrEmpty(moduleName))
+{
+    moduleDir = $"{projectName}.{moduleName}/{projectName}.{moduleName}";
+    nc = $"{projectName}.{moduleName}";
+}
+
+outputFileName = model.RootModel.OutDir + "/csharp/" + moduleDir + ".Entities/" + entityName + ".cs";
 
 <%
 
-namespace <$ projectName $>.Entities
+namespace <$ nc $>.Entities
 {
     /// <summary>
     /// <$ model.Table.Comment $>

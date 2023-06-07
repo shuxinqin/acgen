@@ -3,7 +3,17 @@ var projectName = model.ProjectName;
 var moduleName = model.ModuleName;
 
 var entityName = UnderScoreCaseToPascal(model.Table.TrimedName);
-outputFileName = model.RootModel.OutDir + "/csharp/" + projectName + "." + "Repositories/Impls/" + entityName + "Repository.cs";
+
+string moduleDir = $"{projectName}";
+string nc = $"{projectName}";
+
+if(!string.IsNullOrEmpty(moduleName))
+{
+    moduleDir = $"{projectName}.{moduleName}/{projectName}.{moduleName}";
+    nc = $"{projectName}.{moduleName}";
+}
+
+outputFileName = model.RootModel.OutDir + "/csharp/" + moduleDir + ".Repositories/Impls/" + entityName + "Repository.cs";
 
 var table = (AcGen.DbTableInfo)model.Table;
 var idColumn = table.Columns.Where(a => a.IsPrimaryKey).FirstOrDefault();
@@ -16,7 +26,7 @@ if(idColumn != null)
 
 <%
 
-namespace <$ projectName $>.Repositories
+namespace <$ nc $>.Repositories
 {
     class <$ entityName $>Repository : RepositoryBase<<$ entityName $>>, I<$ entityName $>Repository
     {
