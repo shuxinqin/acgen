@@ -51,7 +51,12 @@ namespace <$ nc $>.Entity.Mapping
                 {
             <%
             this.Property(a => a.<$ column.Name $>).HasSize(<$ column.Length $>);
-            this.Property(a => a.<$ column.Name $>).IsNullable(<$ column.IsNullable ? "true" : "false" $>);
+            %>
+                }
+                if(column.DataTypeName == "string" && !column.IsNullable)
+                {
+            <%
+            this.Property(a => a.<$ column.Name $>).IsNullable(false);
             %>
                 }
                 if(column.DataTypeName == "decimal")
