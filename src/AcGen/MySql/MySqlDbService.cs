@@ -37,12 +37,7 @@ namespace AcGen.MySql
                 DbTableInfo dbTable = new DbTableInfo();
                 dbTable.Name = table.TABLE_NAME;
                 dbTable.Schema = table.TABLE_SCHEMA;
-                dbTable.Comment = table.TABLE_COMMENT;
-
-                if (dbTable.Comment != null)
-                {
-                    dbTable.Comment = dbTable.Comment.Replace("\r\n", " ").Replace("\r", " ").Replace("\n", " ");
-                }
+                dbTable.Comment = ReplaceRN(table.TABLE_COMMENT);
 
                 var tableColumns = columns.Where(a => a.TABLE_NAME == table.TABLE_NAME).ToList();
 
@@ -55,7 +50,7 @@ namespace AcGen.MySql
                     dbColumn.Length = tableColumn.CHARACTER_MAXIMUM_LENGTH == null ? null : (int)tableColumn.CHARACTER_MAXIMUM_LENGTH;
                     dbColumn.Precision = tableColumn.NUMERIC_PRECISION == null ? null : (byte)tableColumn.NUMERIC_PRECISION;
                     dbColumn.Scale = tableColumn.NUMERIC_SCALE == null ? null : (byte)tableColumn.NUMERIC_SCALE;
-                    dbColumn.Comment = tableColumn.COLUMN_COMMENT;
+                    dbColumn.Comment = ReplaceRN(tableColumn.COLUMN_COMMENT);
                     dbColumn.IsPrimaryKey = tableColumn.IsPrimaryKey();
                     dbColumn.IsAutoIncrement = tableColumn.IsAutoIncrement();
                     dbColumn.IsNullable = tableColumn.IsNullable();
@@ -126,6 +121,15 @@ namespace AcGen.MySql
             }
 
             throw new NotSupportedException($"未支持数据库类型 {dbType} 映射");
+        }
+        static string ReplaceRN(string str)
+        {
+            if (str == null)
+                return str;
+
+            str = str.Replace("\r\n", " ").Replace("\r", " ").Replace("\n", " ");
+
+            return str;
         }
     }
 }
