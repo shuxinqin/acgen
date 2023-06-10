@@ -39,6 +39,11 @@ namespace AcGen.MySql
                 dbTable.Schema = table.TABLE_SCHEMA;
                 dbTable.Comment = table.TABLE_COMMENT;
 
+                if (dbTable.Comment != null)
+                {
+                    dbTable.Comment = dbTable.Comment.Replace("\r\n", " ").Replace("\r", " ").Replace("\n", " ");
+                }
+
                 var tableColumns = columns.Where(a => a.TABLE_NAME == table.TABLE_NAME).ToList();
 
                 foreach (var tableColumn in tableColumns.OrderBy(a => a.ORDINAL_POSITION))
