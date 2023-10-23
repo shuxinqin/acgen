@@ -72,7 +72,7 @@ namespace AcGen.MySql
             if (dbType == "int")
             {
                 string lowerColumnName = column.COLUMN_NAME.ToLower();
-                if (lowerColumnName.StartsWith("is_"))
+                if (lowerColumnName.StartsWith("is_")|| lowerColumnName.StartsWith("has_"))
                 {
                     return isNullable ? "bool?" : "bool";
                 }
@@ -80,6 +80,14 @@ namespace AcGen.MySql
                 if (lowerColumnName.StartsWith("is"))
                 {
                     if (column.COLUMN_NAME.Length > 2 && char.IsUpper(column.COLUMN_NAME[2]))
+                    {
+                        return isNullable ? "bool?" : "bool";
+                    }
+                }
+
+                if (lowerColumnName.StartsWith("has"))
+                {
+                    if (column.COLUMN_NAME.Length > 3 && char.IsUpper(column.COLUMN_NAME[3]))
                     {
                         return isNullable ? "bool?" : "bool";
                     }
