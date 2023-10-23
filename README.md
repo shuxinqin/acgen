@@ -1,7 +1,12 @@
 # acgen
-acgen 是基于 .net 6 开发的一个根据数据库表结构支持模版的代码生成器。
+acgen 是基于 .net 6 开发的一个根据数据库表结构支持模版的代码生成器。可以根据现有数据库表仅用一个命令生成实体、DTO、Repository层、Service层、API层、前端模型、前端CURD代码，可以自定义生成代码模版和根据自己的项目结构定义生成代码的保存目录。
 
 目前仅支持 mysql。如需连接其它类型数据库，请参考 mysql 实现自行扩展即可。
+
+**生成效果：**
+
+![image](https://github.com/shuxinqin/acgen/assets/11437679/f89ed332-ad9e-4eea-bd9c-bbfc3145f237)
+
 
 ## 编译
 在 AcGen 目录中打开 cmd 运行命令：
