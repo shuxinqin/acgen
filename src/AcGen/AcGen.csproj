@@ -5,7 +5,9 @@
 		<TargetFramework>net8.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<AssemblyName>acgen</AssemblyName>
-		<PublishAot>true</PublishAot>
+
+		<!--尝试了没成功-->
+		<!--<PublishAot>true</PublishAot>-->
 
 		<LangVersion>10.0</LangVersion>
 
@@ -13,6 +15,10 @@
 		<AssemblyVersion>1.1.0.0</AssemblyVersion>
 		<FileVersion>1.1.0.0</FileVersion>
 	</PropertyGroup>
+
+	<ItemGroup>
+		<RdXmlFile Include="rd.xml" />
+	</ItemGroup>
 
 	<ItemGroup>
 		<PackageReference Include="Chloe.Extension" Version="5.10.0" />

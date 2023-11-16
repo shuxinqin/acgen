@@ -1,0 +1,8 @@
+<Directives>
+	<Application>
+		<Assembly Name="Natasha.CSharp"  Dynamic="Required All">
+		</Assembly>
+		<Assembly Name="Natasha.Domain"  Dynamic="Required All">
+		</Assembly>
+	</Application>
+</Directives>
