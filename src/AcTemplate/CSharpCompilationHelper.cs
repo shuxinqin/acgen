@@ -9,7 +9,8 @@ namespace AcTemplate
 
         static CSharpCompilationHelper()
         {
-            NatashaInitializer.InitializeAndPreheating().GetAwaiter().GetResult();
+            //NatashaInitializer.InitializeAndPreheating().GetAwaiter().GetResult();
+            NatashaInitializer.Init();
         }
 
         public static Assembly Compile(List<string> sourceCodes)

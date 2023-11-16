@@ -2,9 +2,12 @@
 
 	<PropertyGroup>
 		<OutputType>Exe</OutputType>
-		<TargetFramework>net6.0</TargetFramework>
+		<TargetFramework>net8.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<AssemblyName>acgen</AssemblyName>
+		<PublishAot>true</PublishAot>
+
+		<LangVersion>10.0</LangVersion>
 
 		<Version>1.1.0</Version>
 		<AssemblyVersion>1.1.0.0</AssemblyVersion>
@@ -19,15 +22,15 @@
 		<PackageReference Include="Chloe.SQLite" Version="5.10.0" />
 		<PackageReference Include="Chloe.SqlServer" Version="5.10.0" />
 
-		<PackageReference Include="Microsoft.Data.Sqlite" Version="2.1.0" />
-		<PackageReference Include="MySqlConnector" Version="2.1.7" />
-		<PackageReference Include="Oracle.ManagedDataAccess.Core" Version="2.12.0-beta2" />
+		<PackageReference Include="Microsoft.Data.Sqlite" Version="8.0.0" />
+		<PackageReference Include="MySqlConnector" Version="2.3.0" />
+		<PackageReference Include="Oracle.ManagedDataAccess.Core" Version="3.21.120" />
 		<PackageReference Include="Npgsql" Version="4.0.0" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<Content Include="templates\ApiController.t">
-		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
 		<Content Include="templates\Models\Search.t">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -72,10 +75,10 @@
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
 		<Content Include="templates\TypeScript\Api.t">
-		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
 		<Content Include="templates\TypeScript\Models\Model.t">
-		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
 	</ItemGroup>
 
