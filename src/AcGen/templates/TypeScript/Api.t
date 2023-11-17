@@ -100,7 +100,7 @@ export async function update(params: UpdateInput, mode: ErrorMessageMode = "moda
 }
 
 export async function del(id: <$ keyType $>, mode: ErrorMessageMode = "modal") {
-  let params = { id: id };
+  let params = id;
   return defHttp.post(
     {
       url: Api.Delete,

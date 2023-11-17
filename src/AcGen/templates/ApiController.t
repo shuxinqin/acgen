@@ -140,19 +140,19 @@ namespace <$ nc $>.Controllers
         [Permission("<$ modulePermission $><$ model.Table.TrimedName.ToLower() $>.delete")]
         [HttpPost]
         [ProducesResponseType(typeof(ApiResult), 200)]
-        public async Task<ApiResult> Delete([FromBody] IdInput<<$ keyType $>> input)
+        public async Task<ApiResult> Delete([FromBody] <$ keyType $> id)
         {
         <#
             if(isSoftDelete && hasDeleteUserIdField)
             {
             <%
-            await this.Service.DeleteAsync(input.Id, this.CurrentSession.UserId);
+            await this.Service.DeleteAsync(id, this.CurrentSession.UserId);
             %>
             }
             else
             {
             <%
-            await this.Service.DeleteAsync(input.Id);
+            await this.Service.DeleteAsync(id);
             %>
             }
         #>
