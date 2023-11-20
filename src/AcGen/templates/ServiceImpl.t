@@ -139,6 +139,39 @@ namespace <$ nc $>.Services
             %>
             }
         #>
+
+        <#
+            if(isSoftDelete)
+            {
+                if(hasDeleteUserId)
+                {
+            <%
+        public async Task DeleteBatchAsync(List<<$ keyType $>> ids, string deleteUserId)
+        {
+            await this.Repository.UpdateAsync(a => ids.Contains(a.Id), a => new <$ entityName $>() { IsDeleted = true, DeleteUserId = deleteUserId });
+        }
+            %>
+                }
+                else
+                {
+            <%
+        public async Task DeleteBatchAsync(List<<$ keyType $>> ids)
+        {
+            await this.Repository.UpdateAsync(a => ids.Contains(a.Id), a => new <$ entityName $>() { IsDeleted = true });
+        }
+            %>
+                }
+            }
+            else
+            {
+            <%
+        public async Task DeleteBatchAsync(List<<$ keyType $>> ids)
+        {
+            await this.Repository.UpdateAsync(a => ids.Contains(a.Id), a => new <$ entityName $>() { IsDeleted = true });
+        }
+            %>
+            }
+        #>
     }
 }
 

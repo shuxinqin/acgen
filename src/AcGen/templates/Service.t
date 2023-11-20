@@ -53,6 +53,20 @@ namespace <$ nc $>.Services
         %>
         }
     #>
+    <#
+        if(isSoftDelete && hasDeleteUserId)
+        {
+        <%
+        Task DeleteBatchAsync(List<<$ keyType $>> ids, string deleteUserId);
+        %>
+        }
+        else
+        {
+        <%
+        Task DeleteBatchAsync(List<<$ keyType $>> ids);
+        %>
+        }
+    #>
     }
 }
 

@@ -140,19 +140,46 @@ namespace <$ nc $>.Controllers
         [Permission("<$ modulePermission $><$ model.Table.TrimedName.ToLower() $>.delete")]
         [HttpPost]
         [ProducesResponseType(typeof(ApiResult), 200)]
-        public async Task<ApiResult> Delete([FromBody] <$ keyType $> id)
+        public async Task<ApiResult> Delete([FromBody] IdInput<<$ keyType $>> input)
         {
         <#
             if(isSoftDelete && hasDeleteUserIdField)
             {
             <%
-            await this.Service.DeleteAsync(id, this.CurrentSession.UserId);
+            await this.Service.DeleteAsync(input.Id, this.CurrentSession.UserId);
             %>
             }
             else
             {
             <%
-            await this.Service.DeleteAsync(id);
+            await this.Service.DeleteAsync(input.Id);
+            %>
+            }
+        #>
+            return this.DeleteSuccessMsg();
+        }
+
+        /// <summary>
+        /// 批量删除
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <returns></returns>
+        [Permission("<$ modulePermission $><$ model.Table.TrimedName.ToLower() $>.delete")]
+        [HttpPost]
+        [ProducesResponseType(typeof(ApiResult), 200)]
+        public async Task<ApiResult> DeleteBatch([FromBody] List<<$ keyType $>> ids)
+        {
+        <#
+            if(isSoftDelete && hasDeleteUserIdField)
+            {
+            <%
+            await this.Service.DeleteBatchAsync(ids, this.CurrentSession.UserId);
+            %>
+            }
+            else
+            {
+            <%
+            await this.Service.DeleteBatchAsync(ids);
             %>
             }
         #>
