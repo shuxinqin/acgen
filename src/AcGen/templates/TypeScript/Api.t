@@ -75,11 +75,11 @@ export async function getPageList(params: PageListQueryInput, mode: ErrorMessage
   );
 }
 
-export async function add(params: AddInput, mode: ErrorMessageMode = "modal"): Promise<Model> {
+export async function add(data: AddInput, mode: ErrorMessageMode = "modal"): Promise<Model> {
   return defHttp.post<Model>(
     {
       url: Api.Add,
-      params
+      data: data
     },
     {
       errorMessageMode: mode
@@ -87,11 +87,11 @@ export async function add(params: AddInput, mode: ErrorMessageMode = "modal"): P
   );
 }
 
-export async function update(params: UpdateInput, mode: ErrorMessageMode = "modal") {
+export async function update(data: UpdateInput, mode: ErrorMessageMode = "modal") {
   return defHttp.post(
     {
       url: Api.Update,
-      params
+      data: data
     },
     {
       errorMessageMode: mode
@@ -100,11 +100,11 @@ export async function update(params: UpdateInput, mode: ErrorMessageMode = "moda
 }
 
 export async function del(id: <$ keyType $>, mode: ErrorMessageMode = "modal") {
-  let params = { id: id };
+
   return defHttp.post(
     {
       url: Api.Delete,
-      params
+      data: id
     },
     {
       errorMessageMode: mode
