@@ -167,7 +167,7 @@ namespace <$ nc $>.Services
             <%
         public async Task DeleteBatchAsync(List<<$ keyType $>> ids)
         {
-            await this.Repository.UpdateAsync(a => ids.Contains(a.Id), a => new <$ entityName $>() { IsDeleted = true });
+            await this.Repository.DeleteAsync(a => ids.Contains(a.Id));
         }
             %>
             }
