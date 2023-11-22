@@ -11,7 +11,7 @@ if(!string.IsNullOrEmpty(moduleName))
     moduleDir = $"{moduleName}/";
 }
 
-outputFileName = model.RootModel.OutDir + "/TypeScript/" + moduleDir + "model/" + entityName + "Model.ts";
+outputFileName = model.RootModel.OutDir + "/TypeScript/" + moduleDir + "Models/" + entityName + "Model.ts";
 
 <%
 export interface <$ entityName $>Model {
@@ -86,15 +86,13 @@ export interface Update<$ entityName $>Input extends <$ entityName $>InputBase {
 %>
 
 <%
-export interface ListQueryInput {
+export interface QueryInput {
   Order?: string;
   Keyword?: string;
 }
 
-export interface PageListQueryInput {
+export interface PageQueryInput extends QueryInput {
   Page: number;
   PageSize: number;
-  Order?: string;
-  Keyword?: string;
 }
 %>

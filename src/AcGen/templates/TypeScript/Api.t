@@ -32,9 +32,9 @@ import {
   <$ entityName $>Model as Model,
   Add<$ entityName $>Input as AddInput,
   Update<$ entityName $>Input as UpdateInput,
-  ListQueryInput,
-  PageListQueryInput
-} from "./model/<$ entityName $>Model";
+  QueryInput,
+  PageQueryInput
+} from "./Models/<$ entityName $>Model";
 
 function appendApiPath(action: string) {
   return "/<$ moduleApiPath $><$ entityName $>/" + action;
@@ -45,12 +45,12 @@ let Api = {
   PageList: appendApiPath("PageList"),
   Add: appendApiPath("Add"),
   Update: appendApiPath("Update"),
-  Delete: appendApiPath("Delete")
+  Delete: appendApiPath("Delete"),
+  DeleteBatch: appendApiPath("DeleteBatch")
 };
 
 
-export async function getList(params: ListQueryInput, mode: ErrorMessageMode = "modal"): Promise<Model[]> {
-
+export async function getList(params: QueryInput, mode: ErrorMessageMode = "modal"): Promise<Model[]> {
   return defHttp.get<Model[]>(
     {
       url: Api.List,
@@ -62,8 +62,7 @@ export async function getList(params: ListQueryInput, mode: ErrorMessageMode = "
   );
 }
 
-export async function getPageList(params: PageListQueryInput, mode: ErrorMessageMode = "modal"): Promise<PageData<Model>> {
-
+export async function getPageList(params: PageQueryInput, mode: ErrorMessageMode = "modal"): Promise<PageData<Model>> {
   return defHttp.get<PageData<Model>>(
     {
       url: Api.PageList,
@@ -87,8 +86,8 @@ export async function add(data: AddInput, mode: ErrorMessageMode = "modal"): Pro
   );
 }
 
-export async function update(data: UpdateInput, mode: ErrorMessageMode = "modal") {
-  return defHttp.post(
+export async function update(data: UpdateInput, mode: ErrorMessageMode = "modal"): Promise<Model> {
+  return defHttp.post<Model>(
     {
       url: Api.Update,
       data: data
@@ -100,11 +99,22 @@ export async function update(data: UpdateInput, mode: ErrorMessageMode = "modal"
 }
 
 export async function del(id: <$ keyType $>, mode: ErrorMessageMode = "modal") {
-
   return defHttp.post(
     {
       url: Api.Delete,
       data: id
+    },
+    {
+      errorMessageMode: mode
+    }
+  );
+}
+
+export async function deleteBatch(ids: <$ keyType $>[], mode: ErrorMessageMode = "modal") {
+  return defHttp.post(
+    {
+      url: Api.DeleteBatch,
+      data: ids
     },
     {
       errorMessageMode: mode
