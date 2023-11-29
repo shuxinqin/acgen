@@ -95,4 +95,5 @@ export interface PageQueryInput extends QueryInput {
   Page: number;
   PageSize: number;
 }
+
 %>
