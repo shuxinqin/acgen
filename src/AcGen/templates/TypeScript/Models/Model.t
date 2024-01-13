@@ -96,4 +96,8 @@ export interface PageQueryInput extends QueryInput {
   PageSize: number;
 }
 
+export interface ImportInput {
+  Rows: string[][];
+}
+
 %>

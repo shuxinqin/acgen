@@ -25,9 +25,9 @@ if(idColumn != null)
 }
 
 <%
-import { defHttp } from "/@/utils/http/axios";
+import { defHttp } from "@/utils/http/axios";
 import { ErrorMessageMode } from "/#/axios";
-import { PageData } from "/@/api/types/PageData";
+import { PageData } from "@/api/types/PageData";
 import {
   <$ entityName $>Model as Model,
   Add<$ entityName $>Input as AddInput,
@@ -46,7 +46,8 @@ let Api = {
   Add: appendApiPath("Add"),
   Update: appendApiPath("Update"),
   Delete: appendApiPath("Delete"),
-  DeleteBatch: appendApiPath("DeleteBatch")
+  DeleteBatch: appendApiPath("DeleteBatch"),
+  Import: appendApiPath("Import"),
 };
 
 
@@ -54,7 +55,7 @@ export async function getList(params: QueryInput, mode: ErrorMessageMode = "moda
   return defHttp.get<Model[]>(
     {
       url: Api.List,
-      params
+      params: params
     },
     {
       errorMessageMode: mode
@@ -66,7 +67,7 @@ export async function getPageList(params: PageQueryInput, mode: ErrorMessageMode
   return defHttp.get<PageData<Model>>(
     {
       url: Api.PageList,
-      params
+      params: params
     },
     {
       errorMessageMode: mode
@@ -115,6 +116,18 @@ export async function deleteBatch(ids: <$ keyType $>[], mode: ErrorMessageMode =
     {
       url: Api.DeleteBatch,
       data: ids
+    },
+    {
+      errorMessageMode: mode
+    }
+  );
+}
+
+export async function importData(input: ImportInput, mode: ErrorMessageMode = "modal") {
+  return defHttp.post(
+    {
+      url: Api.Import,
+      data: input
     },
     {
       errorMessageMode: mode
