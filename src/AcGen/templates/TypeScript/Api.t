@@ -33,7 +33,8 @@ import {
   Add<$ entityName $>Input as AddInput,
   Update<$ entityName $>Input as UpdateInput,
   QueryInput,
-  PageQueryInput
+  PageQueryInput,
+  ImportInput
 } from "./Models/<$ entityName $>Model";
 
 function appendApiPath(action: string) {
