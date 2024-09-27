@@ -55,22 +55,19 @@ namespace <$ nc $>.Repositories
 
         public async Task<List<<$ entityName $>>> GetListAsync(<$ entityName $>Search condition)
         {
-            var q = this.Query();
-            <#
-            if(idColumn != null)
-            {
-            
-                <%
-            q = q.OrderByDesc(a => a.<$ idColumn.Name $>);
-                %>
-
-            }
-            #>
+            var q = this.BuildQuery(condition);
 
             return await q.ToListAsync();
         }
 
         public async Task<PageData<<$ entityName $>>> GetPageListAsync(Pagination pagination, <$ entityName $>Search condition)
+        {
+            var q = this.BuildQuery(condition);
+
+            return await q.TakePageDataAsync(pagination);
+        }
+		
+        IQuery<<$ entityName $>> BuildQuery(<$ entityName $>Search condition)
         {
             var q = this.Query();
             <#
@@ -84,7 +81,7 @@ namespace <$ nc $>.Repositories
             }
             #>
 
-            return await q.TakePageDataAsync(pagination);
+            return q;
         }
     }
 }
