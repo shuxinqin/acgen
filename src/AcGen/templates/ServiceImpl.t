@@ -32,6 +32,7 @@ var hasDeleteUserId = table.Columns.Any(a => a.Name =="DeleteUserId");
 
 namespace <$ nc $>.Services
 {
+    [ImplementationOf(typeof(I<$ entityName $>Service))]
     public class <$ entityName $>Service : BizServiceBase<I<$ entityName $>Repository>, I<$ entityName $>Service
     {
         public <$ entityName $>Service(IServiceProvider services) : base(services)

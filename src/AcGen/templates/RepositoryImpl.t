@@ -28,6 +28,7 @@ if(idColumn != null)
 
 namespace <$ nc $>.Repositories
 {
+    [ImplementationOf(typeof(I<$ entityName $>Repository))]
     class <$ entityName $>Repository : RepositoryBase<<$ entityName $>>, I<$ entityName $>Repository
     {
         public <$ entityName $>Repository(IDbContext dbContext) : base(dbContext)
