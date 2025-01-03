@@ -130,7 +130,7 @@ namespace <$ nc $>.Controllers
         public async Task<ApiResult> Update([FromBody] Update<$ entityName $>Input input)
         {
             <$ entityName $>Model model = await this.Service.UpdateAsync(input);
-            return this.AddSuccessData(model);
+            return this.SuccessData(model);
         }
 
         /// <summary>
