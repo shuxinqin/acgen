@@ -39,7 +39,7 @@ namespace <$ nc $>.Controllers
 {
     [ApiController]
     [Route("api/<$ moduleRoute $>[controller]/[action]")]
-    [Login]
+    [LoginRequired]
     public class <$ entityName $>Controller : WebApiController<I<$ entityName $>Service>
     {
 
