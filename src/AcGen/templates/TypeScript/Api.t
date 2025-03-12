@@ -104,7 +104,7 @@ export async function del(id: <$ keyType $>, mode: ErrorMessageMode = "modal") {
   return defHttp.post(
     {
       url: Api.Delete,
-      data: id
+      data: { Id: id }
     },
     {
       errorMessageMode: mode
