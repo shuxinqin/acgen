@@ -71,6 +71,7 @@ namespace <$ nc $>.Repositories
         IQuery<<$ entityName $>> BuildQuery(<$ entityName $>Search condition)
         {
             var q = this.Query();
+            q = q.SplitQuery();
             <#
             if(idColumn != null)
             {
