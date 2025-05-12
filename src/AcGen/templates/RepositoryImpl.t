@@ -39,7 +39,7 @@ namespace <$ nc $>.Repositories
         public async Task<<$ entityName $>> GetDetailAsync(<$ keyType $> id)
         {
             var q = this.Query();
-            q = q.IncludeAll();
+
             <#
             if(idColumn != null)
             {
